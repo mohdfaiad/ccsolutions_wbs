@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2018/07/14 17:25:15.094,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2018/07/14 17:25:21.456,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\WebModuleUnit1.pas</Transaction>
+    <Transaction>2018/07/14 17:25:25.581,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ServerConst1.pas</Transaction>
+    <Transaction>2018/07/14 17:25:25.670,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\js\base64.js</Transaction>
+    <Transaction>2018/07/14 17:25:25.705,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\js\serverfunctionexecutor.js</Transaction>
+    <Transaction>2018/07/14 17:25:25.737,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\js\json2.js</Transaction>
+    <Transaction>2018/07/14 17:25:25.771,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\js\callbackframework.js</Transaction>
+    <Transaction>2018/07/14 17:25:25.813,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\js\serverfunctions.js</Transaction>
+    <Transaction>2018/07/14 17:25:25.841,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\js\base64-min.js</Transaction>
+    <Transaction>2018/07/14 17:25:25.881,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\js\json2-min.js</Transaction>
+    <Transaction>2018/07/14 17:25:25.931,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\js\serverfunctionexecutor-min.js</Transaction>
+    <Transaction>2018/07/14 17:25:25.975,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\js\callbackframework-min.js</Transaction>
+    <Transaction>2018/07/14 17:25:26.001,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\js\connection.js</Transaction>
+    <Transaction>2018/07/14 17:25:26.048,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\js\serverfunctioninvoker.js</Transaction>
+    <Transaction>2018/07/14 17:25:26.082,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\css\main.css</Transaction>
+    <Transaction>2018/07/14 17:25:26.113,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\css\serverfunctioninvoker.css</Transaction>
+    <Transaction>2018/07/14 17:25:26.165,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\templates\reversestring.html</Transaction>
+    <Transaction>2018/07/14 17:25:26.206,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\templates\serverfunctioninvoker.html</Transaction>
+    <Transaction>2018/07/14 17:25:26.286,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\images\collapse.png</Transaction>
+    <Transaction>2018/07/14 17:25:26.318,=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\images\expand.png</Transaction>
+    <Transaction>2018/07/14 17:28:30.543,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\srv_method.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ServerMethodsUnit1.dfm</Transaction>
+    <Transaction>2018/07/14 17:28:30.543,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\srv_method.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2018/07/14 17:28:41.322,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\web_module.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\WebModuleUnit1.dfm</Transaction>
+    <Transaction>2018/07/14 17:28:41.322,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\web_module.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\WebModuleUnit1.pas</Transaction>
+    <Transaction>2018/07/14 17:28:56.963,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\srv_const.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ServerConst1.pas</Transaction>
+    <Transaction>2018/07/14 17:29:06.931,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\usrv_const.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\srv_const.pas</Transaction>
+    <Transaction>2018/07/14 17:29:13.575,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\usrv_method.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\srv_method.pas</Transaction>
+    <Transaction>2018/07/14 17:29:13.575,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\usrv_method.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\srv_method.dfm</Transaction>
+    <Transaction>2018/07/14 17:29:17.648,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\uweb_module.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\web_module.pas</Transaction>
+    <Transaction>2018/07/14 17:29:17.648,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\uweb_module.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\web_module.dfm</Transaction>
+    <Transaction>2018/07/14 17:29:35.463,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_srvmethod.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\usrv_method.dfm</Transaction>
+    <Transaction>2018/07/14 17:29:35.463,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_srvmethod.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\usrv_method.pas</Transaction>
+    <Transaction>2018/07/14 17:29:39.068,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_web_module.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\uweb_module.dfm</Transaction>
+    <Transaction>2018/07/14 17:29:39.068,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_web_module.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\uweb_module.pas</Transaction>
+    <Transaction>2018/07/14 17:29:46.478,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\uclass_srvconst.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\usrv_const.pas</Transaction>
+    <Transaction>2018/07/14 17:29:50.284,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_webmodule.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_web_module.pas</Transaction>
+    <Transaction>2018/07/14 17:29:50.284,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_webmodule.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_web_module.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
