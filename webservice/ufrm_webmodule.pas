@@ -12,29 +12,29 @@ uses
 
 type
   Tfrm_webmodule = class(TWebModule)
-    DSHTTPWebDispatcher1: TDSHTTPWebDispatcher;
-    DSServer1: TDSServer;
-   DSAuthenticationManager1: TDSAuthenticationManager;
-    DSServerClass1: TDSServerClass;
-    ServerFunctionInvoker: TPageProducer;
-    ReverseString: TPageProducer;
-    WebFileDispatcher1: TWebFileDispatcher;
-    DSProxyGenerator1: TDSProxyGenerator;
-    DSServerMetaDataProvider1: TDSServerMetaDataProvider;
-    procedure DSServerClass1GetClass(DSServerClass: TDSServerClass;
+    dshttpweb: TDSHTTPWebDispatcher;
+    dsserver: TDSServer;
+    dsauthentication: TDSAuthenticationManager;
+    dsserverclass: TDSServerClass;
+    serverfunction: TPageProducer;
+    reversestring: TPageProducer;
+    webfile: TWebFileDispatcher;
+    dsproxygenerator: TDSProxyGenerator;
+    dsserverprovider: TDSServerMetaDataProvider;
+    procedure dsserverclassGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
-    procedure DSAuthenticationManager1UserAuthorize(Sender: TObject;
+    procedure dsauthenticationUserAuthorize(Sender: TObject;
       EventObject: TDSAuthorizeEventObject; var valid: Boolean);
-    procedure DSAuthenticationManager1UserAuthenticate(Sender: TObject;
+    procedure dsauthenticationUserAuthenticate(Sender: TObject;
       const Protocol, Context, User, Password: string; var valid: Boolean;
       UserRoles: TStrings);
-    procedure ServerFunctionInvokerHTMLTag(Sender: TObject; Tag: TTag;
+    procedure serverfunctionHTMLTag(Sender: TObject; Tag: TTag;
       const TagString: string; TagParams: TStrings; var ReplaceText: string);
     procedure WebModuleDefaultAction(Sender: TObject;
       Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
     procedure WebModuleBeforeDispatch(Sender: TObject;
       Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
-    procedure WebFileDispatcher1BeforeDispatch(Sender: TObject;
+    procedure webfileBeforeDispatch(Sender: TObject;
       const AFileName: string; Request: TWebRequest; Response: TWebResponse;
       var Handled: Boolean);
     procedure WebModuleCreate(Sender: TObject);
@@ -57,27 +57,27 @@ implementation
 
 uses ufrm_srvmethod, Web.WebReq;
 
-procedure Tfrm_webmodule.DSServerClass1GetClass(
+procedure Tfrm_webmodule.dsserverclassGetClass(
   DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_srvmethod.Tfrm_srvmethod;
+  PersistentClass := ufrm_srvmethod.methods;
 end;
 
-procedure Tfrm_webmodule.DSAuthenticationManager1UserAuthenticate(
+procedure Tfrm_webmodule.dsauthenticationUserAuthenticate(
   Sender: TObject; const Protocol, Context, User, Password: string;
   var valid: Boolean; UserRoles: TStrings);
 begin
   valid := True;
 end;
 
-procedure Tfrm_webmodule.DSAuthenticationManager1UserAuthorize(
+procedure Tfrm_webmodule.dsauthenticationUserAuthorize(
   Sender: TObject; EventObject: TDSAuthorizeEventObject; 
   var valid: Boolean);
 begin
   valid := True;
 end;
 
-procedure Tfrm_webmodule.ServerFunctionInvokerHTMLTag(Sender: TObject; Tag: TTag;
+procedure Tfrm_webmodule.serverfunctionHTMLTag(Sender: TObject; Tag: TTag;
   const TagString: string; TagParams: TStrings; var ReplaceText: string);
 begin
   if SameText(TagString, 'urlpath') then
@@ -89,7 +89,7 @@ begin
   else if SameText(TagString, 'classname') then
     ReplaceText := ufrm_srvmethod.Tfrm_srvmethod.ClassName
   else if SameText(TagString, 'loginrequired') then
-    if DSHTTPWebDispatcher1.AuthenticationManager <> nil then
+    if dshttpweb.AuthenticationManager <> nil then
       ReplaceText := 'true'
     else
       ReplaceText := 'false'
@@ -128,7 +128,7 @@ begin
     (Request.RemoteAddr = '0:0:0:0:0:0:0:1') or (Request.RemoteAddr = '::1');
 end;
 
-procedure Tfrm_webmodule.WebFileDispatcher1BeforeDispatch(Sender: TObject;
+procedure Tfrm_webmodule.webfileBeforeDispatch(Sender: TObject;
   const AFileName: string; Request: TWebRequest; Response: TWebResponse;
   var Handled: Boolean);
 var
@@ -138,9 +138,9 @@ begin
   if SameFileName(ExtractFileName(AFileName), 'serverfunctions.js') then
     if not FileExists(AFileName) or (FileAge(AFileName, D1) and FileAge(WebApplicationFileName, D2) and (D1 < D2)) then
     begin
-      DSProxyGenerator1.TargetDirectory := ExtractFilePath(AFileName);
-      DSProxyGenerator1.TargetUnitName := ExtractFileName(AFileName);
-      DSProxyGenerator1.Write;
+      dsproxygenerator.TargetDirectory := ExtractFilePath(AFileName);
+      dsproxygenerator.TargetUnitName := ExtractFileName(AFileName);
+      dsproxygenerator.Write;
     end;
 end;
 

@@ -12,6 +12,8 @@ var connectionInfo;
 function setConnection(host, port, urlPath)
 {
   connectionInfo = {"host":host,"port":port,"authentication":null,"pathPrefix":urlPath};
+  connectionInfo.dscontext = "api";
+  connectionInfo.restcontext = "rest";
 }
 
 function setCredentials(user, password)

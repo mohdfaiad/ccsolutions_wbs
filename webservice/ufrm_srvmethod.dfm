@@ -1,5 +1,46 @@
 object frm_srvmethod: Tfrm_srvmethod
   OldCreateOrder = False
-  Height = 150
-  Width = 215
+  Height = 285
+  Width = 353
+  object conn_db: TFDConnection
+    Params.Strings = (
+      'ConnectionDef=ccs_connection')
+    Connected = True
+    LoginPrompt = False
+    Left = 24
+    Top = 16
+  end
+  object wait_cursor: TFDGUIxWaitCursor
+    Provider = 'Console'
+    Left = 80
+    Top = 72
+  end
+  object driver_link: TFDPhysMySQLDriverLink
+    VendorHome = 'C:\ccsolutions_wbs\'
+    VendorLib = 'libmysql.dll'
+    Left = 24
+    Top = 72
+  end
+  object man_db: TFDManager
+    DriverDefFileName = 'C:\ccsolutions_wbs\data\ccs_connection.ini'
+    ConnectionDefFileName = 'C:\ccsolutions_wbs\data\ccs_connection.ini'
+    FormatOptions.AssignedValues = [fvMapRules]
+    FormatOptions.OwnMapRules = True
+    FormatOptions.MapRules = <>
+    Active = True
+    Left = 80
+    Top = 16
+  end
+  object json_link: TFDStanStorageJSONLink
+    Left = 136
+    Top = 72
+  end
+  object bin_link: TFDStanStorageBinLink
+    Left = 184
+    Top = 72
+  end
+  object schema_adapter: TFDSchemaAdapter
+    Left = 248
+    Top = 72
+  end
 end
