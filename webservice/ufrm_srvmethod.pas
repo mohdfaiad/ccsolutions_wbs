@@ -31,7 +31,10 @@ uses
   FireDAC.Comp.UI,
   FireDAC.Comp.Client,
   FireDAC.Stan.StorageBin,
-  FireDAC.Stan.StorageJSON, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt;
+  FireDAC.Stan.StorageJSON,
+  FireDAC.DatS,
+  FireDAC.DApt.Intf,
+  FireDAC.DApt;
 
 type
   Tfrm_srvmethod = class(TDSServerModule)
