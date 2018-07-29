@@ -317,8 +317,6 @@ begin
           lJSonWriter.WriteValue(qry.FieldByName('ins_cnpj').AsString);
           lJSonWriter.WritePropertyName('ins_im');
           lJSonWriter.WriteValue(qry.FieldByName('ins_im').AsString);
-          lJSonWriter.WritePropertyName('ins_suframa');
-          lJSonWriter.WriteValue(qry.FieldByName('ins_suframa').AsString);
           lJSonWriter.WritePropertyName('ins_add_bus_zipcode');
           lJSonWriter.WriteValue(qry.FieldByName('ins_add_bus_zipcode').AsString);
           lJSonWriter.WritePropertyName('ins_add_bus_address');
@@ -350,7 +348,7 @@ begin
           lJSonWriter.WritePropertyName('ins_dt_open');
           lJSonWriter.WriteValue(qry.FieldByName('ins_dt_open').AsString);
           lJSonWriter.WritePropertyName('ins_status');
-          lJSonWriter.WriteValue(qry.FieldByName('ins_status').AsString);
+          lJSonWriter.WriteValue(qry.FieldByName('ins_status').AsInteger);
           lJSonWriter.WritePropertyName('ins_deleted_at');
           lJSonWriter.WriteValue(qry.FieldByName('ins_deleted_at').AsString);
           lJSonWriter.WritePropertyName('ins_dt_registration');
