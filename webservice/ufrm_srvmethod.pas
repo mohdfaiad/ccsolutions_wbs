@@ -38,13 +38,13 @@ uses
 
 type
   Tfrm_srvmethod = class(TDSServerModule)
-    conn_db: TFDConnection;
-    wait_cursor: TFDGUIxWaitCursor;
-    driver_link: TFDPhysMySQLDriverLink;
-    man_db: TFDManager;
-    json_link: TFDStanStorageJSONLink;
-    bin_link: TFDStanStorageBinLink;
-    schema_adapter: TFDSchemaAdapter;
+    conn_db         : TFDConnection;
+    wait_cursor     : TFDGUIxWaitCursor;
+    driver_link     : TFDPhysMySQLDriverLink;
+    man_db          : TFDManager;
+    json_link       : TFDStanStorageJSONLink;
+    bin_link        : TFDStanStorageBinLink;
+    schema_adapter  : TFDSchemaAdapter;
   private
     { Private declarations }
   public
@@ -53,8 +53,9 @@ type
     function reversestring(Value: string): string;
     function user_signin(usr_username, usr_password: string): string;
     function get_product(contract_ctr_cod: string): string;
-    function get_enterprise(contract_ctr_cod : string) : string;
-    function get_insurance(contract_ctr_cod : string) :string;
+    function get_enterprise(contract_ctr_cod : string): string;
+    function get_insurance(contract_ctr_cod : string): string;
+    function contract_user_signin(ctr_id: Int64; ctr_usr_username, ctr_usr_password: string) : string;
   end;
 
   methods = class(Tfrm_srvmethod)
@@ -135,6 +136,70 @@ begin
         lResultado.AddPair('result', 'error');
 
         result := lResultado.ToString;
+
+        GetInvocationMetadata().ResponseCode    := 200;
+        GetInvocationMetadata().ResponseContent := Result;
+      except on E: Exception do
+      end;
+    finally
+    end;
+  end;
+end;
+
+function Tfrm_srvmethod.contract_user_signin(ctr_id: Int64; ctr_usr_username, ctr_usr_password: string): string;
+var
+  SQL           : string;
+  qry           : TFDQuery;
+  lResultado    : TJSONObject;
+  lStringWriter : TStringWriter;
+  lJSonWriter   : TJSonTextWriter;
+begin
+  SQL := 'set @po_valid_user = 0;'        +
+         'set @po_contract_ctr_cod = 0;'  +
+         'set @po_ctr_usr_cod = 0;'       +
+         'call proc_contract_user_signin('+ IntToStr(ctr_id) +', '+ QuotedStr(ctr_usr_username) +', '+ QuotedStr(ctr_usr_password) +', @po_valid_user, @po_contract_ctr_cod, @po_ctr_usr_cod);' +
+         'select @po_valid_user as valid_user, @po_contract_ctr_cod as contract_ctr_cod, @po_ctr_usr_cod as ctr_usr_cod;';
+
+  qry := TFDQuery.Create(Self);
+
+  qry.Close;
+  qry.Connection := conn_db;
+  qry.SQL.Add(SQL);
+  qry.Prepare;
+  qry.Open;
+
+  if not (qry.IsEmpty) then begin
+    try
+      try
+        lStringWriter := TStringWriter.Create;
+        lJSonWriter   := TJsonTextWriter.Create(lStringWriter);
+
+        lJSonWriter.Formatting := TJsonFormatting.Indented;
+        lJSonWriter.WriteStartObject;
+
+        lJSonWriter.WritePropertyName('result');
+        lJSonWriter.WriteValue('success');
+        lJSonWriter.WritePropertyName('contract_user_signin');
+        lJSonWriter.WriteStartArray;
+
+        while not (qry.Eof) do begin
+          lJSonWriter.WriteStartObject;
+
+          lJSonWriter.WritePropertyName('valid_user');
+          lJSonWriter.WriteValue(qry.FieldByName('valid_user').AsLargeInt);
+          lJSonWriter.WritePropertyName('contract_ctr_cod');
+          lJSonWriter.WriteValue(qry.FieldByName('contract_ctr_cod').AsString);
+          lJSonWriter.WritePropertyName('ctr_usr_cod');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_cod').AsString);
+
+          qry.Next;
+          lJSonWriter.WriteEndObject;
+        end;
+
+        lJSonWriter.WriteEndArray;
+        lJSonWriter.WriteEndObject;
+
+        Result := lStringWriter.ToString;
 
         GetInvocationMetadata().ResponseCode    := 200;
         GetInvocationMetadata().ResponseContent := Result;
