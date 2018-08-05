@@ -51,11 +51,14 @@ type
     { Public declarations }
     function echostring(Value: string): string;
     function reversestring(Value: string): string;
+
     function user_signin(usr_username, usr_password: string): string;
+    function contract_user_signin(ctr_id: Int64; ctr_usr_username, ctr_usr_password: string) : string;
+
+    function get_contract(contract_ctr_cod: string): string;
     function get_product(contract_ctr_cod: string): string;
     function get_enterprise(contract_ctr_cod : string): string;
     function get_insurance(contract_ctr_cod : string): string;
-    function contract_user_signin(ctr_id: Int64; ctr_usr_username, ctr_usr_password: string) : string;
   end;
 
   methods = class(Tfrm_srvmethod)
@@ -155,10 +158,9 @@ var
   lJSonWriter   : TJSonTextWriter;
 begin
   SQL := 'set @po_valid_user = 0;'        +
-         'set @po_contract_ctr_cod = 0;'  +
          'set @po_ctr_usr_cod = 0;'       +
-         'call proc_contract_user_signin('+ IntToStr(ctr_id) +', '+ QuotedStr(ctr_usr_username) +', '+ QuotedStr(ctr_usr_password) +', @po_valid_user, @po_contract_ctr_cod, @po_ctr_usr_cod);' +
-         'select @po_valid_user as valid_user, @po_contract_ctr_cod as contract_ctr_cod, @po_ctr_usr_cod as ctr_usr_cod;';
+         'call proc_contract_user_signin('+ IntToStr(ctr_id) +', '+ QuotedStr(ctr_usr_username) +', '+ QuotedStr(ctr_usr_password) +', @po_valid_user, @po_ctr_usr_cod);' +
+         'select @po_valid_user as valid_user, @po_ctr_usr_cod as ctr_usr_cod;';
 
   qry := TFDQuery.Create(Self);
 
@@ -187,8 +189,6 @@ begin
 
           lJSonWriter.WritePropertyName('valid_user');
           lJSonWriter.WriteValue(qry.FieldByName('valid_user').AsLargeInt);
-          lJSonWriter.WritePropertyName('contract_ctr_cod');
-          lJSonWriter.WriteValue(qry.FieldByName('contract_ctr_cod').AsString);
           lJSonWriter.WritePropertyName('ctr_usr_cod');
           lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_cod').AsString);
 
@@ -213,6 +213,84 @@ end;
 function Tfrm_srvmethod.echostring(Value: string): string;
 begin
   Result := Value;
+end;
+
+function Tfrm_srvmethod.get_contract(contract_ctr_cod: string): string;
+var
+  SQL           : string;
+  qry           : TFDQuery;
+  lResultado    : TJSONObject;
+  lStringWriter : TStringWriter;
+  lJSonWriter   : TJSonTextWriter;
+begin
+  SQL := 'call proc_contract_read('+ QuotedStr(contract_ctr_cod) +');';
+
+  qry := TFDQuery.Create(Self);
+
+  qry.Close;
+  qry.Connection := conn_db;
+  qry.SQL.Add(SQL);
+  qry.Prepare;
+  qry.Open;
+
+  if not (qry.IsEmpty) then begin
+    try
+      try
+        lStringWriter := TStringWriter.Create;
+        lJSonWriter   := TJsonTextWriter.Create(lStringWriter);
+
+        lJSonWriter.Formatting := TJsonFormatting.Indented;
+        lJSonWriter.WriteStartObject;
+
+        lJSonWriter.WritePropertyName('result');
+        lJSonWriter.WriteValue('success');
+        lJSonWriter.WritePropertyName('contract');
+        lJSonWriter.WriteStartArray;
+
+        while not (qry.Eof) do begin
+          lJSonWriter.WriteStartObject;
+
+          lJSonWriter.WritePropertyName('contract_ctr_cod');
+          lJSonWriter.WriteValue(qry.FieldByName('contract_ctr_cod').AsString);
+          lJSonWriter.WritePropertyName('ctr_cod');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_cod').AsString);
+          lJSonWriter.WritePropertyName('ctr_id');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_id').AsInteger);
+          lJSonWriter.WritePropertyName('ctr_first_name');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_first_name').AsString);
+          lJSonWriter.WritePropertyName('ctr_last_name');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_last_name').AsString);
+          lJSonWriter.WritePropertyName('ctr_email');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_email').AsString);
+          lJSonWriter.WritePropertyName('ctr_phone1');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_phone1').AsString);
+          lJSonWriter.WritePropertyName('ctr_dt_birth');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_dt_birth').AsString);
+          lJSonWriter.WritePropertyName('ctr_user_license');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_user_license').AsString);
+          lJSonWriter.WritePropertyName('ctr_status');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_status').AsString);
+          lJSonWriter.WritePropertyName('ent_deleted_at');
+          lJSonWriter.WriteValue(qry.FieldByName('ent_deleted_at').AsString);
+          lJSonWriter.WritePropertyName('ent_dt_registration');
+          lJSonWriter.WriteValue(qry.FieldByName('ent_dt_registration').AsString);
+
+          qry.Next;
+          lJSonWriter.WriteEndObject;
+        end;
+
+        lJSonWriter.WriteEndArray;
+        lJSonWriter.WriteEndObject;
+
+        Result := lStringWriter.ToString;
+
+        GetInvocationMetadata().ResponseCode    := 200;
+        GetInvocationMetadata().ResponseContent := Result;
+      except on E: Exception do
+      end;
+    finally
+    end;
+  end;
 end;
 
 function Tfrm_srvmethod.get_enterprise(contract_ctr_cod: string): string;
