@@ -55,10 +55,12 @@ type
     function user_signin(usr_username, usr_password: string): string;
     function contract_user_signin(ctr_id: Int64; ctr_usr_username, ctr_usr_password: string) : string;
 
-    function get_contract(contract_ctr_cod: string): string;
-    function get_product(contract_ctr_cod: string): string;
-    function get_enterprise(contract_ctr_cod : string): string;
-    function get_insurance(contract_ctr_cod : string): string;
+    function get_contract(ctr_token: string): string;
+    function get_product(ctr_token: string): string;
+    function get_client(ctr_token: string): string;
+    function get_enterprise(ctr_token: string): string;
+    function get_insurance(ctr_token: string): string;
+    function get_phonebook(ctr_token: string):string;
   end;
 
   methods = class(Tfrm_srvmethod)
@@ -157,10 +159,11 @@ var
   lStringWriter : TStringWriter;
   lJSonWriter   : TJSonTextWriter;
 begin
-  SQL := 'set @po_valid_user = 0;'        +
+  SQL := 'set @po_valid_user  = 0;'       +
          'set @po_ctr_usr_cod = 0;'       +
-         'call proc_contract_user_signin('+ IntToStr(ctr_id) +', '+ QuotedStr(ctr_usr_username) +', '+ QuotedStr(ctr_usr_password) +', @po_valid_user, @po_ctr_usr_cod);' +
-         'select @po_valid_user as valid_user, @po_ctr_usr_cod as ctr_usr_cod;';
+         'set @po_ctr_token   = 0;'       +
+         'call proc_contract_user_signin('+ IntToStr(ctr_id) +', '+ QuotedStr(ctr_usr_username) +', '+ QuotedStr(ctr_usr_password) +', @po_valid_user, @po_ctr_usr_cod, @po_ctr_token);' +
+         'select @po_valid_user as valid_user, @po_ctr_usr_cod as ctr_usr_cod, @po_ctr_token as ctr_token;';
 
   qry := TFDQuery.Create(Self);
 
@@ -191,6 +194,8 @@ begin
           lJSonWriter.WriteValue(qry.FieldByName('valid_user').AsLargeInt);
           lJSonWriter.WritePropertyName('ctr_usr_cod');
           lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_cod').AsString);
+          lJSonWriter.WritePropertyName('ctr_token');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_token').AsString);
 
           qry.Next;
           lJSonWriter.WriteEndObject;
@@ -215,7 +220,7 @@ begin
   Result := Value;
 end;
 
-function Tfrm_srvmethod.get_contract(contract_ctr_cod: string): string;
+function Tfrm_srvmethod.get_client(ctr_token: string): string;
 var
   SQL           : string;
   qry           : TFDQuery;
@@ -223,7 +228,169 @@ var
   lStringWriter : TStringWriter;
   lJSonWriter   : TJSonTextWriter;
 begin
-  SQL := 'call proc_contract_read('+ QuotedStr(contract_ctr_cod) +');';
+  SQL := 'call proc_client_read('+ QuotedStr(ctr_token) +');';
+
+  qry := TFDQuery.Create(Self);
+
+  qry.Close;
+  qry.Connection := conn_db;
+  qry.SQL.Add(SQL);
+  qry.Prepare;
+  qry.Open;
+
+  if not (qry.IsEmpty) then begin
+    try
+      try
+        lStringWriter := TStringWriter.Create;
+        lJSonWriter   := TJsonTextWriter.Create(lStringWriter);
+
+        lJSonWriter.Formatting := TJsonFormatting.Indented;
+        lJSonWriter.WriteStartObject;
+
+        lJSonWriter.WritePropertyName('result');
+        lJSonWriter.WriteValue('success');
+        lJSonWriter.WritePropertyName('client');
+        lJSonWriter.WriteStartArray;
+
+        while not (qry.Eof) do begin
+          lJSonWriter.WriteStartObject;
+
+          lJSonWriter.WritePropertyName('cli_cod');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_cod').AsString);
+          lJSonWriter.WritePropertyName('table_price_tbp_cod');
+          lJSonWriter.WriteValue(qry.FieldByName('table_price_tbp_cod').AsString);
+          lJSonWriter.WritePropertyName('cli_type');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_type').AsString);
+          lJSonWriter.WritePropertyName('cli_id');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_id').AsInteger);
+          lJSonWriter.WritePropertyName('cli_first_name');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_first_name').AsString);
+          lJSonWriter.WritePropertyName('cli_last_name');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_last_name').AsString);
+          lJSonWriter.WritePropertyName('cli_email');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_email').AsString);
+          lJSonWriter.WritePropertyName('cli_cpfcnpj');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_cpfcnpj').AsString);
+          lJSonWriter.WritePropertyName('cli_rgie');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_rgie').AsString);
+          lJSonWriter.WritePropertyName('cli_im');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_im').AsString);
+          lJSonWriter.WritePropertyName('cli_suframa');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_suframa').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bus_zipcode');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bus_zipcode').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bus_address');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bus_address').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bus_number');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bus_number').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bus_street');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bus_street').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bus_complement');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bus_complement').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bus_city');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bus_city').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bus_state');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bus_state').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bus_country');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bus_country').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bil_zipcode');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bil_zipcode').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bil_address');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bil_address').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bil_number');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bil_number').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bil_street');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bil_street').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bil_complement');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bil_complement').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bil_city');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bil_city').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bil_state');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bil_state').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bil_country');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_bil_country').AsString);
+          lJSonWriter.WritePropertyName('cli_add_bus_zipcode');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_del_zipcode').AsString);
+          lJSonWriter.WritePropertyName('cli_add_del_address');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_del_address').AsString);
+          lJSonWriter.WritePropertyName('cli_add_del_number');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_del_number').AsString);
+          lJSonWriter.WritePropertyName('cli_add_del_street');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_del_street').AsString);
+          lJSonWriter.WritePropertyName('cli_add_del_complement');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_del_complement').AsString);
+          lJSonWriter.WritePropertyName('cli_add_del_city');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_del_city').AsString);
+          lJSonWriter.WritePropertyName('cli_add_del_state');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_del_state').AsString);
+          lJSonWriter.WritePropertyName('cli_add_del_country');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_add_del_country').AsString);
+          lJSonWriter.WritePropertyName('cli_phone1');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_phone1').AsString);
+          lJSonWriter.WritePropertyName('cli_phone2');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_phone2').AsString);
+          lJSonWriter.WritePropertyName('cli_phone3');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_phone3').AsString);
+          lJSonWriter.WritePropertyName('cli_phone4');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_phone4').AsString);
+          lJSonWriter.WritePropertyName('cli_contact');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_contact').AsString);
+          lJSonWriter.WritePropertyName('cli_day_maturity');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_day_maturity').AsString);
+          lJSonWriter.WritePropertyName('cli_dt_birthopen');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_dt_birthopen').AsString);
+          lJSonWriter.WritePropertyName('cli_weight');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_weight').AsString);
+          lJSonWriter.WritePropertyName('cli_height');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_height').AsString);
+          lJSonWriter.WritePropertyName('cli_blood_type');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_blood_type').AsString);
+          lJSonWriter.WritePropertyName('cli_rh_factor');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_rh_factor').AsString);
+          lJSonWriter.WritePropertyName('cli_du_factor');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_du_factor').AsString);
+          lJSonWriter.WritePropertyName('cli_cns');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_cns').AsString);
+          lJSonWriter.WritePropertyName('cli_gender');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_gender').AsString);
+          lJSonWriter.WritePropertyName('cli_skin_color');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_skin_color').AsString);
+          lJSonWriter.WritePropertyName('cli_status');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_status').AsBoolean);
+          lJSonWriter.WritePropertyName('cli_image1');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_image1').AsString);
+          lJSonWriter.WritePropertyName('cli_deleted_at');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_deleted_at').AsString);
+          lJSonWriter.WritePropertyName('cli_dt_registration');
+          lJSonWriter.WriteValue(qry.FieldByName('cli_dt_registration').AsString);
+
+          qry.Next;
+          lJSonWriter.WriteEndObject;
+        end;
+
+        lJSonWriter.WriteEndArray;
+        lJSonWriter.WriteEndObject;
+
+        Result := lStringWriter.ToString;
+
+        GetInvocationMetadata().ResponseCode    := 200;
+        GetInvocationMetadata().ResponseContent := Result;
+      except on E: Exception do
+      end;
+    finally
+    end;
+  end;
+end;
+
+function Tfrm_srvmethod.get_contract(ctr_token: string): string;
+var
+  SQL           : string;
+  qry           : TFDQuery;
+  lResultado    : TJSONObject;
+  lStringWriter : TStringWriter;
+  lJSonWriter   : TJSonTextWriter;
+begin
+  SQL := 'call proc_contract_read('+ QuotedStr(ctr_token) +');';
 
   qry := TFDQuery.Create(Self);
 
@@ -250,12 +417,8 @@ begin
         while not (qry.Eof) do begin
           lJSonWriter.WriteStartObject;
 
-          lJSonWriter.WritePropertyName('contract_ctr_cod');
-          lJSonWriter.WriteValue(qry.FieldByName('contract_ctr_cod').AsString);
-          lJSonWriter.WritePropertyName('ctr_cod');
-          lJSonWriter.WriteValue(qry.FieldByName('ctr_cod').AsString);
           lJSonWriter.WritePropertyName('ctr_id');
-          lJSonWriter.WriteValue(qry.FieldByName('ctr_id').AsInteger);
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_id').AsLargeInt);
           lJSonWriter.WritePropertyName('ctr_first_name');
           lJSonWriter.WriteValue(qry.FieldByName('ctr_first_name').AsString);
           lJSonWriter.WritePropertyName('ctr_last_name');
@@ -269,11 +432,11 @@ begin
           lJSonWriter.WritePropertyName('ctr_user_license');
           lJSonWriter.WriteValue(qry.FieldByName('ctr_user_license').AsString);
           lJSonWriter.WritePropertyName('ctr_status');
-          lJSonWriter.WriteValue(qry.FieldByName('ctr_status').AsString);
-          lJSonWriter.WritePropertyName('ent_deleted_at');
-          lJSonWriter.WriteValue(qry.FieldByName('ent_deleted_at').AsString);
-          lJSonWriter.WritePropertyName('ent_dt_registration');
-          lJSonWriter.WriteValue(qry.FieldByName('ent_dt_registration').AsString);
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_status').AsBoolean);
+          lJSonWriter.WritePropertyName('ctr_deleted_at');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_deleted_at').AsString);
+          lJSonWriter.WritePropertyName('ctr_dt_registration');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_dt_registration').AsString);
 
           qry.Next;
           lJSonWriter.WriteEndObject;
@@ -293,7 +456,7 @@ begin
   end;
 end;
 
-function Tfrm_srvmethod.get_enterprise(contract_ctr_cod: string): string;
+function Tfrm_srvmethod.get_enterprise(ctr_token: string): string;
 var
   SQL           : string;
   qry           : TFDQuery;
@@ -301,7 +464,7 @@ var
   lStringWriter : TStringWriter;
   lJSonWriter   : TJSonTextWriter;
 begin
-  SQL := 'call proc_enterprise_read('+ QuotedStr(contract_ctr_cod) +');';
+  SQL := 'call proc_enterprise_read('+ QuotedStr(ctr_token) +');';
 
   qry := TFDQuery.Create(Self);
 
@@ -330,8 +493,6 @@ begin
 
           lJSonWriter.WritePropertyName('ent_cod');
           lJSonWriter.WriteValue(qry.FieldByName('ent_cod').AsString);
-          lJSonWriter.WritePropertyName('contract_ctr_cod');
-          lJSonWriter.WriteValue(qry.FieldByName('contract_ctr_cod').AsString);
           lJSonWriter.WritePropertyName('ent_id');
           lJSonWriter.WriteValue(qry.FieldByName('ent_id').AsInteger);
           lJSonWriter.WritePropertyName('ent_type');
@@ -381,7 +542,7 @@ begin
           lJSonWriter.WritePropertyName('ent_dt_open');
           lJSonWriter.WriteValue(qry.FieldByName('ent_dt_open').AsString);
           lJSonWriter.WritePropertyName('ent_status');
-          lJSonWriter.WriteValue(qry.FieldByName('ent_status').AsString);
+          lJSonWriter.WriteValue(qry.FieldByName('ent_status').AsBoolean);
           lJSonWriter.WritePropertyName('ent_deleted_at');
           lJSonWriter.WriteValue(qry.FieldByName('ent_deleted_at').AsString);
           lJSonWriter.WritePropertyName('ent_dt_registration');
@@ -405,7 +566,7 @@ begin
   end;
 end;
 
-function Tfrm_srvmethod.get_insurance(contract_ctr_cod: string): string;
+function Tfrm_srvmethod.get_insurance(ctr_token: string): string;
 var
   SQL           : string;
   qry           : TFDQuery;
@@ -413,7 +574,7 @@ var
   lStringWriter : TStringWriter;
   lJSonWriter   : TJSonTextWriter;
 begin
-  SQL := 'call proc_insurance_read('+ QuotedStr(contract_ctr_cod) +');';
+  SQL := 'call proc_insurance_read('+ QuotedStr(ctr_token) +');';
 
   qry := TFDQuery.Create(Self);
 
@@ -515,7 +676,7 @@ begin
   end;
 end;
 
-function Tfrm_srvmethod.get_product(contract_ctr_cod: string): string;
+function Tfrm_srvmethod.get_phonebook(ctr_token: string): string;
 var
   SQL           : string;
   qry           : TFDQuery;
@@ -523,7 +684,81 @@ var
   lStringWriter : TStringWriter;
   lJSonWriter   : TJSonTextWriter;
 begin
-  SQL := 'call proc_product_read('+ QuotedStr(contract_ctr_cod) +');';
+  SQL := 'call proc_phonebook_read('+ QuotedStr(ctr_token) +');';
+
+  qry := TFDQuery.Create(Self);
+
+  qry.Close;
+  qry.Connection := conn_db;
+  qry.SQL.Add(SQL);
+  qry.Prepare;
+  qry.Open;
+
+  if not (qry.IsEmpty) then begin
+    try
+      try
+        lStringWriter := TStringWriter.Create;
+        lJSonWriter   := TJsonTextWriter.Create(lStringWriter);
+
+        lJSonWriter.Formatting := TJsonFormatting.Indented;
+        lJSonWriter.WriteStartObject;
+
+        lJSonWriter.WritePropertyName('result');
+        lJSonWriter.WriteValue('success');
+        lJSonWriter.WritePropertyName('phonebook');
+        lJSonWriter.WriteStartArray;
+
+        while not (qry.Eof) do begin
+          lJSonWriter.WriteStartObject;
+
+          lJSonWriter.WritePropertyName('pho_cod');
+          lJSonWriter.WriteValue(qry.FieldByName('pho_cod').AsString);
+          lJSonWriter.WritePropertyName('pho_id');
+          lJSonWriter.WriteValue(qry.FieldByName('pho_id').AsInteger);
+          lJSonWriter.WritePropertyName('pho_name');
+          lJSonWriter.WriteValue(qry.FieldByName('pho_name').AsString);
+          lJSonWriter.WritePropertyName('pho_phone1');
+          lJSonWriter.WriteValue(qry.FieldByName('pho_phone1').AsString);
+          lJSonWriter.WritePropertyName('pho_phone2');
+          lJSonWriter.WriteValue(qry.FieldByName('pho_phone2').AsString);
+          lJSonWriter.WritePropertyName('pho_phone3');
+          lJSonWriter.WriteValue(qry.FieldByName('pho_phone3').AsString);
+          lJSonWriter.WritePropertyName('pho_phone4');
+          lJSonWriter.WriteValue(qry.FieldByName('pho_phone4').AsString);
+          lJSonWriter.WritePropertyName('pho_contact');
+          lJSonWriter.WriteValue(qry.FieldByName('pho_contact').AsString);
+          lJSonWriter.WritePropertyName('pho_deleted_at');
+          lJSonWriter.WriteValue(qry.FieldByName('pho_deleted_at').AsString);
+          lJSonWriter.WritePropertyName('pho_dt_registration');
+          lJSonWriter.WriteValue(qry.FieldByName('pho_dt_registration').AsString);
+
+          qry.Next;
+          lJSonWriter.WriteEndObject;
+        end;
+
+        lJSonWriter.WriteEndArray;
+        lJSonWriter.WriteEndObject;
+
+        Result := lStringWriter.ToString;
+
+        GetInvocationMetadata().ResponseCode    := 200;
+        GetInvocationMetadata().ResponseContent := Result;
+      except on E: Exception do
+      end;
+    finally
+    end;
+  end;
+end;
+
+function Tfrm_srvmethod.get_product(ctr_token: string): string;
+var
+  SQL           : string;
+  qry           : TFDQuery;
+  lResultado    : TJSONObject;
+  lStringWriter : TStringWriter;
+  lJSonWriter   : TJSonTextWriter;
+begin
+  SQL := 'call proc_product_read('+ QuotedStr(ctr_token) +');';
 
   qry := TFDQuery.Create(Self);
 
