@@ -8,6 +8,7 @@ uses
   System.Json,
   System.JSON.Writers,
   System.JSON.Types,
+  System.StrUtils,
 
   DataSnap.DSProviderDataModuleAdapter,
   Datasnap.DSServer,
@@ -34,7 +35,14 @@ uses
   FireDAC.Stan.StorageJSON,
   FireDAC.DatS,
   FireDAC.DApt.Intf,
-  FireDAC.DApt;
+  FireDAC.DApt,
+
+  IdBaseComponent,
+  IdComponent,
+  IdTCPConnection,
+  IdTCPClient,
+  IdHTTP,
+  IdURI;
 
 type
   Tfrm_srvmethod = class(TDSServerModule)
@@ -54,6 +62,7 @@ type
 
     function user_signin(usr_username, usr_password: string): string;
     function contract_user_signin(ctr_id: Int64; ctr_usr_username, ctr_usr_password: string) : string;
+    function send_sms(address, username, password, phone, text: string) : string;
 
     function get_contract(ctr_token: string): string;
     function get_product(ctr_token: string): string;
@@ -61,6 +70,7 @@ type
     function get_enterprise(ctr_token: string): string;
     function get_insurance(ctr_token: string): string;
     function get_phonebook(ctr_token: string):string;
+    function get_contract_user(ctr_token: string):string;
   end;
 
   methods = class(Tfrm_srvmethod)
@@ -72,8 +82,6 @@ implementation
 {%CLASSGROUP 'System.Classes.TPersistent'}
 
 {$R *.dfm}
-
-uses System.StrUtils;
 
 function Tfrm_srvmethod.user_signin(usr_username, usr_password: string): string;
 var
@@ -309,7 +317,7 @@ begin
           lJSonWriter.WriteValue(qry.FieldByName('cli_add_bil_state').AsString);
           lJSonWriter.WritePropertyName('cli_add_bil_country');
           lJSonWriter.WriteValue(qry.FieldByName('cli_add_bil_country').AsString);
-          lJSonWriter.WritePropertyName('cli_add_bus_zipcode');
+          lJSonWriter.WritePropertyName('cli_add_del_zipcode');
           lJSonWriter.WriteValue(qry.FieldByName('cli_add_del_zipcode').AsString);
           lJSonWriter.WritePropertyName('cli_add_del_address');
           lJSonWriter.WriteValue(qry.FieldByName('cli_add_del_address').AsString);
@@ -437,6 +445,80 @@ begin
           lJSonWriter.WriteValue(qry.FieldByName('ctr_deleted_at').AsString);
           lJSonWriter.WritePropertyName('ctr_dt_registration');
           lJSonWriter.WriteValue(qry.FieldByName('ctr_dt_registration').AsString);
+
+          qry.Next;
+          lJSonWriter.WriteEndObject;
+        end;
+
+        lJSonWriter.WriteEndArray;
+        lJSonWriter.WriteEndObject;
+
+        Result := lStringWriter.ToString;
+
+        GetInvocationMetadata().ResponseCode    := 200;
+        GetInvocationMetadata().ResponseContent := Result;
+      except on E: Exception do
+      end;
+    finally
+    end;
+  end;
+end;
+
+function Tfrm_srvmethod.get_contract_user(ctr_token: string): string;
+var
+  SQL           : string;
+  qry           : TFDQuery;
+  lResultado    : TJSONObject;
+  lStringWriter : TStringWriter;
+  lJSonWriter   : TJSonTextWriter;
+begin
+  SQL := 'call proc_contract_user_read('+ QuotedStr(ctr_token) +');';
+
+  qry := TFDQuery.Create(Self);
+
+  qry.Close;
+  qry.Connection := conn_db;
+  qry.SQL.Add(SQL);
+  qry.Prepare;
+  qry.Open;
+
+  if not (qry.IsEmpty) then begin
+    try
+      try
+        lStringWriter := TStringWriter.Create;
+        lJSonWriter   := TJsonTextWriter.Create(lStringWriter);
+
+        lJSonWriter.Formatting := TJsonFormatting.Indented;
+        lJSonWriter.WriteStartObject;
+
+        lJSonWriter.WritePropertyName('result');
+        lJSonWriter.WriteValue('success');
+        lJSonWriter.WritePropertyName('contract_user');
+        lJSonWriter.WriteStartArray;
+
+        while not (qry.Eof) do begin
+          lJSonWriter.WriteStartObject;
+
+          lJSonWriter.WritePropertyName('ctr_usr_cod');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_cod').AsString);
+          lJSonWriter.WritePropertyName('ctr_usr_id');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_id').AsInteger);
+          lJSonWriter.WritePropertyName('ctr_usr_first_name');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_first_name').AsString);
+          lJSonWriter.WritePropertyName('ctr_usr_last_name');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_last_name').AsString);
+          lJSonWriter.WritePropertyName('ctr_usr_username');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_username').AsString);
+          lJSonWriter.WritePropertyName('ctr_usr_email');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_email').AsString);
+          lJSonWriter.WritePropertyName('ctr_usr_dt_birth');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_dt_birth').AsString);
+          lJSonWriter.WritePropertyName('ctr_usr_status');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_status').AsBoolean);
+          lJSonWriter.WritePropertyName('ctr_usr_deleted_at');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_deleted_at').AsString);
+          lJSonWriter.WritePropertyName('ctr_usr_dt_registration');
+          lJSonWriter.WriteValue(qry.FieldByName('ctr_usr_dt_registration').AsString);
 
           qry.Next;
           lJSonWriter.WriteEndObject;
@@ -865,6 +947,30 @@ end;
 function Tfrm_srvmethod.reversestring(Value: string): string;
 begin
   Result := System.StrUtils.ReverseString(Value);
+end;
+
+function Tfrm_srvmethod.send_sms(address, username, password, phone, text: string): string;
+var
+  lURL, S, lURLEnconde, lURLDecode  : string;
+  lHTTP                             : TIdHTTP;
+begin
+  lURL  := 'http://'+address + '/default/en_US/send.html?u='+ username +'&p='+ password +'&l=1&n='+ phone +'&m='+ text;
+
+  lHTTP := TIdHTTP.Create(Self);
+
+  try
+    try
+      lURLEnconde := TIdURI.URLEncode(lURL);
+
+      Result := lHTTP.Get(lURLEnconde);
+
+      GetInvocationMetadata().ResponseCode    := 200;
+      GetInvocationMetadata().ResponseContent := Result;
+    except on E: Exception do
+    end;
+  finally
+    lHTTP.Free;
+  end;
 end;
 
 end.
