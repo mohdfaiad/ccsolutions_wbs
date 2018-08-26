@@ -19,8 +19,8 @@ object frm_webmodule: Tfrm_webmodule
       OnAction = WebModuleDefaultAction
     end>
   BeforeDispatch = WebModuleBeforeDispatch
-  Height = 333
-  Width = 414
+  Height = 519
+  Width = 586
   object dsserver: TDSServer
     Left = 48
     Top = 11
@@ -38,13 +38,13 @@ object frm_webmodule: Tfrm_webmodule
     OnUserAuthenticate = dsauthenticationUserAuthenticate
     OnUserAuthorize = dsauthenticationUserAuthorize
     Roles = <>
-    Left = 192
-    Top = 59
+    Left = 48
+    Top = 251
   end
   object dsserverclass: TDSServerClass
     OnGetClass = dsserverclassGetClass
     Server = dsserver
-    Left = 192
+    Left = 160
     Top = 11
   end
   object serverfunction: TPageProducer
@@ -56,8 +56,8 @@ object frm_webmodule: Tfrm_webmodule
   object reversestring: TPageProducer
     HTMLFile = 'templates/reversestring.html'
     OnHTMLTag = serverfunctionHTMLTag
-    Left = 192
-    Top = 104
+    Left = 48
+    Top = 296
   end
   object webfile: TWebFileDispatcher
     WebFileExtensions = <
@@ -109,7 +109,55 @@ object frm_webmodule: Tfrm_webmodule
   end
   object dsserverprovider: TDSServerMetaDataProvider
     Server = dsserver
-    Left = 192
-    Top = 152
+    Left = 48
+    Top = 344
+  end
+  object dssc_phonebook: TDSServerClass
+    OnGetClass = dssc_phonebookGetClass
+    Server = dsserver
+    Left = 160
+    Top = 59
+  end
+  object dssc_contract: TDSServerClass
+    OnGetClass = dssc_contractGetClass
+    Server = dsserver
+    Left = 160
+    Top = 107
+  end
+  object dssc_enterprise: TDSServerClass
+    OnGetClass = dssc_enterpriseGetClass
+    Server = dsserver
+    Left = 160
+    Top = 155
+  end
+  object dssc_contract_user: TDSServerClass
+    OnGetClass = dssc_contract_userGetClass
+    Server = dsserver
+    Left = 160
+    Top = 203
+  end
+  object dssc_client: TDSServerClass
+    OnGetClass = dssc_clientGetClass
+    Server = dsserver
+    Left = 160
+    Top = 251
+  end
+  object dssc_login: TDSServerClass
+    OnGetClass = dssc_loginGetClass
+    Server = dsserver
+    Left = 160
+    Top = 299
+  end
+  object dssc_reseller: TDSServerClass
+    OnGetClass = dssc_resellerGetClass
+    Server = dsserver
+    Left = 160
+    Top = 347
+  end
+  object dssc_product: TDSServerClass
+    OnGetClass = dssc_productGetClass
+    Server = dsserver
+    Left = 240
+    Top = 11
   end
 end

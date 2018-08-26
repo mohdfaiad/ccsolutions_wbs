@@ -4,7 +4,7 @@ object frm_srvmethod: Tfrm_srvmethod
   Width = 353
   object conn_db: TFDConnection
     Params.Strings = (
-      'ConnectionDef=ccs_connection')
+      'ConnectionDef=database')
     Connected = True
     LoginPrompt = False
     Left = 24
@@ -22,8 +22,8 @@ object frm_srvmethod: Tfrm_srvmethod
     Top = 72
   end
   object man_db: TFDManager
-    DriverDefFileName = 'C:\ccsolutions_wbs\data\ccs_connection.ini'
-    ConnectionDefFileName = 'C:\ccsolutions_wbs\data\ccs_connection.ini'
+    DriverDefFileName = 'C:\ccsolutions_wbs\data\connection.ini'
+    ConnectionDefFileName = 'C:\ccsolutions_wbs\data\connection.ini'
     FormatOptions.AssignedValues = [fvMapRules]
     FormatOptions.OwnMapRules = True
     FormatOptions.MapRules = <>

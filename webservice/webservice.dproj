@@ -112,6 +112,47 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <DesignClass>TWebModule</DesignClass>
         </DCCReference>
         <DCCReference Include="uclass_srvconst.pas"/>
+        <DCCReference Include="ufrm_phonebook.pas">
+            <Form>frm_phonebook</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ufrm_contract.pas">
+            <Form>frm_contract</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ufrm_enterprise.pas">
+            <Form>frm_enterprise</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ufrm_client.pas">
+            <Form>frm_client</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ufrm_contract_user.pas">
+            <Form>frm_contract_user</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ufrm_login.pas">
+            <Form>frm_login</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="u_ds_classhelper.pas"/>
+        <DCCReference Include="ufrm_reseller.pas">
+            <Form>frm_reseller</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ufrm_product.pas">
+            <Form>frm_product</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <None Include="js\base64.js"/>
         <None Include="js\serverfunctionexecutor.js"/>
         <None Include="js\json2.js"/>
@@ -162,10 +203,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 </Source>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="images\collapse.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="js\base64.js" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win64">
-                        <RemoteDir>.\images\</RemoteDir>
-                        <RemoteName>collapse.png</RemoteName>
+                        <RemoteDir>.\js\</RemoteDir>
+                        <RemoteName>base64.js</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -206,6 +247,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <Platform Name="Win64">
                         <RemoteDir>.\js\</RemoteDir>
                         <RemoteName>callbackframework-min.js</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="C:\ccsolutions_wbs\webservice\win32\webservice.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>webservice.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -354,12 +401,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
                     <Platform Name="Linux64">
                         <RemoteDir>.\js\</RemoteDir>
                         <RemoteName>callbackframework-min.js</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Win32\Debug\webservice.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>webservice.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -884,10 +925,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="js\base64.js" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="images\collapse.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win64">
-                        <RemoteDir>.\js\</RemoteDir>
-                        <RemoteName>base64.js</RemoteName>
+                        <RemoteDir>.\images\</RemoteDir>
+                        <RemoteName>collapse.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

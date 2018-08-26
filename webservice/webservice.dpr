@@ -14,7 +14,16 @@ uses
   Datasnap.DSSession,
   ufrm_srvmethod in 'ufrm_srvmethod.pas' {frm_srvmethod: TDSServerModule},
   ufrm_webmodule in 'ufrm_webmodule.pas' {frm_webmodule: TWebModule},
-  uclass_srvconst in 'uclass_srvconst.pas';
+  uclass_srvconst in 'uclass_srvconst.pas',
+  ufrm_phonebook in 'ufrm_phonebook.pas' {frm_phonebook: TDataModule},
+  ufrm_contract in 'ufrm_contract.pas' {frm_contract: TDataModule},
+  ufrm_enterprise in 'ufrm_enterprise.pas' {frm_enterprise: TDataModule},
+  ufrm_client in 'ufrm_client.pas' {frm_client: TDataModule},
+  ufrm_contract_user in 'ufrm_contract_user.pas' {frm_contract_user: TDataModule},
+  ufrm_login in 'ufrm_login.pas' {frm_login: TDataModule},
+  u_ds_classhelper in 'u_ds_classhelper.pas',
+  ufrm_reseller in 'ufrm_reseller.pas' {frm_reseller: TDataModule},
+  ufrm_product in 'ufrm_product.pas' {frm_product: TDataModule};
 
 {$R *.res}
 

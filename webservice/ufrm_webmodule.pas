@@ -21,7 +21,8 @@ uses
   Datasnap.DSCommonServer,
   Datasnap.DSProxyJavaScript,
   Datasnap.DSHTTP,
-  DataSnap.DSAuth;
+  DataSnap.DSAuth, ufrm_phonebook, ufrm_contract, ufrm_enterprise, ufrm_client,
+  ufrm_contract_user, ufrm_login, ufrm_reseller, ufrm_product;
 
 type
   Tfrm_webmodule = class(TWebModule)
@@ -34,6 +35,14 @@ type
     webfile: TWebFileDispatcher;
     dsproxygenerator: TDSProxyGenerator;
     dsserverprovider: TDSServerMetaDataProvider;
+    dssc_phonebook: TDSServerClass;
+    dssc_contract: TDSServerClass;
+    dssc_enterprise: TDSServerClass;
+    dssc_contract_user: TDSServerClass;
+    dssc_client: TDSServerClass;
+    dssc_login: TDSServerClass;
+    dssc_reseller: TDSServerClass;
+    dssc_product: TDSServerClass;
     procedure dsserverclassGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure dsauthenticationUserAuthorize(Sender: TObject;
@@ -51,6 +60,22 @@ type
       const AFileName: string; Request: TWebRequest; Response: TWebResponse;
       var Handled: Boolean);
     procedure WebModuleCreate(Sender: TObject);
+    procedure dssc_phonebookGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_contractGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_enterpriseGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_contract_userGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_clientGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_loginGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_resellerGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_productGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
   private
     { Private declarations }
     FServerFunctionInvokerAction: TWebActionItem;
@@ -69,6 +94,54 @@ implementation
 {$R *.dfm}
 
 uses ufrm_srvmethod, Web.WebReq;
+
+procedure Tfrm_webmodule.dssc_clientGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_client.clients;
+end;
+
+procedure Tfrm_webmodule.dssc_contractGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_contract.contracts;
+end;
+
+procedure Tfrm_webmodule.dssc_contract_userGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_contract_user.contract_users;
+end;
+
+procedure Tfrm_webmodule.dssc_enterpriseGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_enterprise.enterprises;
+end;
+
+procedure Tfrm_webmodule.dssc_loginGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_login.login;
+end;
+
+procedure Tfrm_webmodule.dssc_phonebookGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_phonebook.phonebooks;
+end;
+
+procedure Tfrm_webmodule.dssc_productGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_product.products;
+end;
+
+procedure Tfrm_webmodule.dssc_resellerGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_reseller.resellers;
+end;
 
 procedure Tfrm_webmodule.dsserverclassGetClass(
   DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
