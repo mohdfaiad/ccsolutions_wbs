@@ -157,7 +157,37 @@ object frm_webmodule: Tfrm_webmodule
   object dssc_product: TDSServerClass
     OnGetClass = dssc_productGetClass
     Server = dsserver
-    Left = 240
+    Left = 264
     Top = 11
+  end
+  object dssc_client_contract: TDSServerClass
+    OnGetClass = dssc_client_contractGetClass
+    Server = dsserver
+    Left = 264
+    Top = 59
+  end
+  object dssc_client_contract_iten: TDSServerClass
+    OnGetClass = dssc_client_contract_itenGetClass
+    Server = dsserver
+    Left = 264
+    Top = 107
+  end
+  object dssc_voip_server: TDSServerClass
+    OnGetClass = dssc_voip_serverGetClass
+    Server = dsserver
+    Left = 264
+    Top = 155
+  end
+  object dssc_client_astpp: TDSServerClass
+    OnGetClass = dssc_client_astppGetClass
+    Server = dsserver
+    Left = 264
+    Top = 203
+  end
+  object dssc_client_sippulse: TDSServerClass
+    OnGetClass = dssc_client_sippulseGetClass
+    Server = dsserver
+    Left = 264
+    Top = 251
   end
 end

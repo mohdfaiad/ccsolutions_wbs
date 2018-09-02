@@ -22,7 +22,9 @@ uses
   Datasnap.DSProxyJavaScript,
   Datasnap.DSHTTP,
   DataSnap.DSAuth, ufrm_phonebook, ufrm_contract, ufrm_enterprise, ufrm_client,
-  ufrm_contract_user, ufrm_login, ufrm_reseller, ufrm_product;
+  ufrm_contract_user, ufrm_login, ufrm_reseller, ufrm_product,
+  ufrm_client_contract, ufrm_client_contract_iten, ufrm_voip_server,
+  ufrm_client_astpp, ufrm_client_sippulse;
 
 type
   Tfrm_webmodule = class(TWebModule)
@@ -43,6 +45,11 @@ type
     dssc_login: TDSServerClass;
     dssc_reseller: TDSServerClass;
     dssc_product: TDSServerClass;
+    dssc_client_contract: TDSServerClass;
+    dssc_client_contract_iten: TDSServerClass;
+    dssc_voip_server: TDSServerClass;
+    dssc_client_astpp: TDSServerClass;
+    dssc_client_sippulse: TDSServerClass;
     procedure dsserverclassGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure dsauthenticationUserAuthorize(Sender: TObject;
@@ -76,6 +83,16 @@ type
       var PersistentClass: TPersistentClass);
     procedure dssc_productGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
+    procedure dssc_client_contractGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_client_contract_itenGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_voip_serverGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_client_astppGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_client_sippulseGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
   private
     { Private declarations }
     FServerFunctionInvokerAction: TWebActionItem;
@@ -99,6 +116,30 @@ procedure Tfrm_webmodule.dssc_clientGetClass(DSServerClass: TDSServerClass;
   var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_client.clients;
+end;
+
+procedure Tfrm_webmodule.dssc_client_astppGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_client_astpp.client_astpps;
+end;
+
+procedure Tfrm_webmodule.dssc_client_contractGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_client_contract.client_contracts;
+end;
+
+procedure Tfrm_webmodule.dssc_client_contract_itenGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_client_contract_iten.client_contract_itens;
+end;
+
+procedure Tfrm_webmodule.dssc_client_sippulseGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_client_sippulse.client_sippulses;
 end;
 
 procedure Tfrm_webmodule.dssc_contractGetClass(
@@ -141,6 +182,12 @@ procedure Tfrm_webmodule.dssc_resellerGetClass(DSServerClass: TDSServerClass;
   var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_reseller.resellers;
+end;
+
+procedure Tfrm_webmodule.dssc_voip_serverGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_voip_server.voip_servers;
 end;
 
 procedure Tfrm_webmodule.dsserverclassGetClass(

@@ -23,7 +23,12 @@ uses
   ufrm_login in 'ufrm_login.pas' {frm_login: TDataModule},
   u_ds_classhelper in 'u_ds_classhelper.pas',
   ufrm_reseller in 'ufrm_reseller.pas' {frm_reseller: TDataModule},
-  ufrm_product in 'ufrm_product.pas' {frm_product: TDataModule};
+  ufrm_product in 'ufrm_product.pas' {frm_product: TDataModule},
+  ufrm_client_contract in 'ufrm_client_contract.pas' {frm_client_contract: TDataModule},
+  ufrm_client_contract_iten in 'ufrm_client_contract_iten.pas' {frm_client_contract_iten: TDataModule},
+  ufrm_voip_server in 'ufrm_voip_server.pas' {frm_voip_server: TDataModule},
+  ufrm_client_astpp in 'ufrm_client_astpp.pas' {frm_client_astpp: TDataModule},
+  ufrm_client_sippulse in 'ufrm_client_sippulse.pas' {frm_client_sippulse: TDataModule};
 
 {$R *.res}
 
