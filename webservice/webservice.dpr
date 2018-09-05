@@ -28,7 +28,8 @@ uses
   ufrm_client_contract_iten in 'ufrm_client_contract_iten.pas' {frm_client_contract_iten: TDataModule},
   ufrm_voip_server in 'ufrm_voip_server.pas' {frm_voip_server: TDataModule},
   ufrm_client_astpp in 'ufrm_client_astpp.pas' {frm_client_astpp: TDataModule},
-  ufrm_client_sippulse in 'ufrm_client_sippulse.pas' {frm_client_sippulse: TDataModule};
+  ufrm_client_sippulse in 'ufrm_client_sippulse.pas' {frm_client_sippulse: TDataModule},
+  ufrm_print_astpp in 'ufrm_print_astpp.pas' {frm_print_astpp: TDataModule};
 
 {$R *.res}
 

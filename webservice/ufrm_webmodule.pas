@@ -50,6 +50,7 @@ type
     dssc_voip_server: TDSServerClass;
     dssc_client_astpp: TDSServerClass;
     dssc_client_sippulse: TDSServerClass;
+    dssc_print_astpp: TDSServerClass;
     procedure dsserverclassGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure dsauthenticationUserAuthorize(Sender: TObject;
@@ -93,6 +94,8 @@ type
       var PersistentClass: TPersistentClass);
     procedure dssc_client_sippulseGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
+    procedure dssc_print_astppGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
   private
     { Private declarations }
     FServerFunctionInvokerAction: TWebActionItem;
@@ -110,7 +113,7 @@ implementation
 
 {$R *.dfm}
 
-uses ufrm_srvmethod, Web.WebReq;
+uses ufrm_srvmethod, Web.WebReq, ufrm_print_astpp;
 
 procedure Tfrm_webmodule.dssc_clientGetClass(DSServerClass: TDSServerClass;
   var PersistentClass: TPersistentClass);
@@ -170,6 +173,12 @@ procedure Tfrm_webmodule.dssc_phonebookGetClass(
   DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_phonebook.phonebooks;
+end;
+
+procedure Tfrm_webmodule.dssc_print_astppGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_print_astpp.print_astpps;
 end;
 
 procedure Tfrm_webmodule.dssc_productGetClass(DSServerClass: TDSServerClass;

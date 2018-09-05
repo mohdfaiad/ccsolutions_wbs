@@ -190,4 +190,10 @@ object frm_webmodule: Tfrm_webmodule
     Left = 264
     Top = 251
   end
+  object dssc_print_astpp: TDSServerClass
+    OnGetClass = dssc_print_astppGetClass
+    Server = dsserver
+    Left = 264
+    Top = 299
+  end
 end

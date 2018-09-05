@@ -1,4 +1,4 @@
-unit ufrm_client;
+unit ufrm_print_astpp;
 
 interface
 
@@ -20,52 +20,53 @@ uses
 
 type
 {$METHODINFO ON}
-  Tfrm_client = class(TDataModule)
+  Tfrm_print_astpp = class(TDataModule)
   private
 
   public
     //FUNCTION GET
-    function Client(const AToken: string): TJSONArray;
+    function PrintASTPP(const AToken, AClient, ADateStart, ADateEnd: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptClient: string;
+    function AcceptPrintASTPP: string;
     //FUNCTION POST
-    function UpdateClient: string;
+    function UpdatePrintASTPP: string;
     //FUNCTION DELETE
-    function CancelClient(const AToken, ACod: string): string;
+    function CancelPrintASTPP(const AToken, ACod: string): string;
 
   end;
 
-  clients = class(Tfrm_client)
+  print_astpps = class(Tfrm_print_astpp)
 
   end;
 {$METHODINFO OFF}
-
 var
-  frm_client: Tfrm_client;
+  frm_print_astpp: Tfrm_print_astpp;
 
 implementation
 
 {%CLASSGROUP 'System.Classes.TPersistent'}
-{$R *.dfm}
-{ Tfrm_client }
 
-function Tfrm_client.AcceptClient: string;
+{$R *.dfm}
+
+{ Tfrm_print_astpp }
+
+function Tfrm_print_astpp.AcceptPrintASTPP: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_client.CancelClient(const AToken, ACod: string): string;
+function Tfrm_print_astpp.CancelPrintASTPP(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_client.Client(const AToken: string): TJSONArray;
+function Tfrm_print_astpp.PrintASTPP(const AToken, AClient, ADateStart, ADateEnd: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
   method  : Tfrm_srvmethod;
 begin
-  SQL     := 'call proc_client_read('+ QuotedStr(AToken) +');';
+  SQL     := 'call proc_import_call_log_astpp_read('+ QuotedStr(AToken) +', '+ QuotedStr(AClient)+', '+ QuotedStr(ADateStart)+', '+ QuotedStr(ADateEnd)+');';
 
   method  := Tfrm_srvmethod.Create(Self);
   qry     := TFDQuery.Create(Self);
@@ -83,7 +84,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_client.UpdateClient: string;
+function Tfrm_print_astpp.UpdatePrintASTPP: string;
 begin
   Result := 'POST';
 end;
