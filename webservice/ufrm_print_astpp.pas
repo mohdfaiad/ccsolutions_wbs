@@ -10,6 +10,7 @@ uses
   System.JSON,
 
   FireDAC.Comp.Client,
+  FireDAC.Stan.Option,
 
   Data.DB,
   Data.DBXPlatform,
@@ -72,6 +73,7 @@ begin
   qry     := TFDQuery.Create(Self);
 
   qry.Connection := method.conn_db;
+  qry.FetchOptions.Mode := TFDFetchMode.fmAll;
 
   if not AToken.IsEmpty then begin
     qry.Open(SQL);
