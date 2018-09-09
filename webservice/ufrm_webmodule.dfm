@@ -196,4 +196,34 @@ object frm_webmodule: Tfrm_webmodule
     Left = 264
     Top = 299
   end
+  object dssc_supplier: TDSServerClass
+    OnGetClass = dssc_supplierGetClass
+    Server = dsserver
+    Left = 264
+    Top = 347
+  end
+  object dssc_ticket_type: TDSServerClass
+    OnGetClass = dssc_ticket_typeGetClass
+    Server = dsserver
+    Left = 344
+    Top = 11
+  end
+  object dssc_ticket_priority: TDSServerClass
+    OnGetClass = dssc_ticket_priorityGetClass
+    Server = dsserver
+    Left = 344
+    Top = 59
+  end
+  object dssc_ticket_category: TDSServerClass
+    OnGetClass = dssc_ticket_categoryGetClass
+    Server = dsserver
+    Left = 344
+    Top = 107
+  end
+  object dssc_ticket_category_sub: TDSServerClass
+    OnGetClass = dssc_ticket_category_subGetClass
+    Server = dsserver
+    Left = 344
+    Top = 155
+  end
 end

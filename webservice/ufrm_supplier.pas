@@ -1,4 +1,4 @@
-unit ufrm_enterprise;
+unit ufrm_supplier;
 
 interface
 
@@ -20,28 +20,28 @@ uses
 
 type
 {$METHODINFO ON}
-  Tfrm_enterprise = class(TDataModule)
+  Tfrm_supplier = class(TDataModule)
   private
 
   public
     //FUNCTION GET
-    function Enterprise (const AToken: string): TJSONArray;
+    function Supplier (const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptEnterprise : string;
+    function AcceptSupplier : string;
     //FUNCTION POST
-    function UpdateEnterprise : string;
+    function UpdateSupplier : string;
     //FUNCTION DELETE
-    function CancelEnterprise (const AToken, ACod: string): string;
+    function CancelSupplier (const AToken, ACod: string): string;
 
   end;
 
-  enterprises = class(Tfrm_enterprise)
+  suppliers = class(Tfrm_supplier)
 
   end;
 {$METHODINFO OFF}
 
 var
-  frm_enterprise: Tfrm_enterprise;
+  frm_supplier: Tfrm_supplier;
 
 implementation
 
@@ -49,25 +49,25 @@ implementation
 
 {$R *.dfm}
 
-{ Tfrm_enterprise }
+{ Tfrm_supplier }
 
-function Tfrm_enterprise.AcceptEnterprise: string;
+function Tfrm_supplier.AcceptSupplier: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_enterprise.CancelEnterprise(const AToken, ACod: string): string;
+function Tfrm_supplier.CancelSupplier(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_enterprise.Enterprise(const AToken: string): TJSONArray;
+function Tfrm_supplier.Supplier(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
   method  : Tfrm_srvmethod;
 begin
-  SQL     := 'call proc_enterprise_read('+ QuotedStr(AToken) +');';
+  SQL     := 'call proc_supplier_read('+ QuotedStr(AToken) +');';
 
   method  := Tfrm_srvmethod.Create(Self);
   qry     := TFDQuery.Create(Self);
@@ -85,7 +85,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_enterprise.UpdateEnterprise: string;
+function Tfrm_supplier.UpdateSupplier: string;
 begin
   Result := 'POST';
 end;

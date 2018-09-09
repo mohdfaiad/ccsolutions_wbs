@@ -1,4 +1,4 @@
-unit ufrm_enterprise;
+unit ufrm_ticket_category;
 
 interface
 
@@ -20,28 +20,28 @@ uses
 
 type
 {$METHODINFO ON}
-  Tfrm_enterprise = class(TDataModule)
+  Tfrm_ticket_category = class(TDataModule)
   private
 
   public
     //FUNCTION GET
-    function Enterprise (const AToken: string): TJSONArray;
+    function TicketCategory (const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptEnterprise : string;
+    function AcceptTicketCategory : string;
     //FUNCTION POST
-    function UpdateEnterprise : string;
+    function UpdateTicketCategory : string;
     //FUNCTION DELETE
-    function CancelEnterprise (const AToken, ACod: string): string;
+    function CancelTicketCategory (const AToken, ACod: string): string;
 
   end;
 
-  enterprises = class(Tfrm_enterprise)
+  ticket_categorys = class(Tfrm_ticket_category)
 
   end;
 {$METHODINFO OFF}
 
 var
-  frm_enterprise: Tfrm_enterprise;
+  frm_ticket_category: Tfrm_ticket_category;
 
 implementation
 
@@ -49,25 +49,26 @@ implementation
 
 {$R *.dfm}
 
-{ Tfrm_enterprise }
+{ Tfrm_ticket_category }
 
-function Tfrm_enterprise.AcceptEnterprise: string;
+function Tfrm_ticket_category.AcceptTicketCategory: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_enterprise.CancelEnterprise(const AToken, ACod: string): string;
+function Tfrm_ticket_category.CancelTicketCategory(const AToken,
+  ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_enterprise.Enterprise(const AToken: string): TJSONArray;
+function Tfrm_ticket_category.TicketCategory(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
   method  : Tfrm_srvmethod;
 begin
-  SQL     := 'call proc_enterprise_read('+ QuotedStr(AToken) +');';
+  SQL     := 'call proc_ticket_category_read('+ QuotedStr(AToken) +');';
 
   method  := Tfrm_srvmethod.Create(Self);
   qry     := TFDQuery.Create(Self);
@@ -85,7 +86,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_enterprise.UpdateEnterprise: string;
+function Tfrm_ticket_category.UpdateTicketCategory: string;
 begin
   Result := 'POST';
 end;

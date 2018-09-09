@@ -1,4 +1,4 @@
-unit ufrm_enterprise;
+unit ufrm_ticket_type;
 
 interface
 
@@ -20,28 +20,28 @@ uses
 
 type
 {$METHODINFO ON}
-  Tfrm_enterprise = class(TDataModule)
+  Tfrm_ticket_type = class(TDataModule)
   private
 
   public
     //FUNCTION GET
-    function Enterprise (const AToken: string): TJSONArray;
+    function TicketType (const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptEnterprise : string;
+    function AcceptTicketType : string;
     //FUNCTION POST
-    function UpdateEnterprise : string;
+    function UpdateTicketType : string;
     //FUNCTION DELETE
-    function CancelEnterprise (const AToken, ACod: string): string;
+    function CancelTicketType (const AToken, ACod: string): string;
 
   end;
 
-  enterprises = class(Tfrm_enterprise)
+  ticket_types = class(Tfrm_ticket_type)
 
   end;
 {$METHODINFO OFF}
 
 var
-  frm_enterprise: Tfrm_enterprise;
+  frm_ticket_type: Tfrm_ticket_type;
 
 implementation
 
@@ -49,25 +49,25 @@ implementation
 
 {$R *.dfm}
 
-{ Tfrm_enterprise }
+{ Tfrm_ticket_type }
 
-function Tfrm_enterprise.AcceptEnterprise: string;
+function Tfrm_ticket_type.AcceptTicketType: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_enterprise.CancelEnterprise(const AToken, ACod: string): string;
+function Tfrm_ticket_type.CancelTicketType(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_enterprise.Enterprise(const AToken: string): TJSONArray;
+function Tfrm_ticket_type.TicketType(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
   method  : Tfrm_srvmethod;
 begin
-  SQL     := 'call proc_enterprise_read('+ QuotedStr(AToken) +');';
+  SQL     := 'call proc_ticket_type_read('+ QuotedStr(AToken) +');';
 
   method  := Tfrm_srvmethod.Create(Self);
   qry     := TFDQuery.Create(Self);
@@ -85,7 +85,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_enterprise.UpdateEnterprise: string;
+function Tfrm_ticket_type.UpdateTicketType: string;
 begin
   Result := 'POST';
 end;

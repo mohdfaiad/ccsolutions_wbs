@@ -29,7 +29,12 @@ uses
   ufrm_voip_server in 'ufrm_voip_server.pas' {frm_voip_server: TDataModule},
   ufrm_client_astpp in 'ufrm_client_astpp.pas' {frm_client_astpp: TDataModule},
   ufrm_client_sippulse in 'ufrm_client_sippulse.pas' {frm_client_sippulse: TDataModule},
-  ufrm_print_astpp in 'ufrm_print_astpp.pas' {frm_print_astpp: TDataModule};
+  ufrm_print_astpp in 'ufrm_print_astpp.pas' {frm_print_astpp: TDataModule},
+  ufrm_supplier in 'ufrm_supplier.pas' {frm_supplier: TDataModule},
+  ufrm_ticket_type in 'ufrm_ticket_type.pas' {frm_ticket_type: TDataModule},
+  ufrm_ticket_priority in 'ufrm_ticket_priority.pas' {frm_ticket_priority: TDataModule},
+  ufrm_ticket_category in 'ufrm_ticket_category.pas' {frm_ticket_category: TDataModule},
+  ufrm_ticket_category_sub in 'ufrm_ticket_category_sub.pas' {frm_ticket_category_sub: TDataModule};
 
 {$R *.res}
 

@@ -51,6 +51,11 @@ type
     dssc_client_astpp: TDSServerClass;
     dssc_client_sippulse: TDSServerClass;
     dssc_print_astpp: TDSServerClass;
+    dssc_supplier: TDSServerClass;
+    dssc_ticket_type: TDSServerClass;
+    dssc_ticket_priority: TDSServerClass;
+    dssc_ticket_category: TDSServerClass;
+    dssc_ticket_category_sub: TDSServerClass;
     procedure dsserverclassGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure dsauthenticationUserAuthorize(Sender: TObject;
@@ -96,6 +101,16 @@ type
       var PersistentClass: TPersistentClass);
     procedure dssc_print_astppGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
+    procedure dssc_supplierGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_ticket_typeGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_ticket_priorityGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_ticket_categoryGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_ticket_category_subGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
   private
     { Private declarations }
     FServerFunctionInvokerAction: TWebActionItem;
@@ -113,7 +128,9 @@ implementation
 
 {$R *.dfm}
 
-uses ufrm_srvmethod, Web.WebReq, ufrm_print_astpp;
+uses ufrm_srvmethod, Web.WebReq, ufrm_print_astpp, ufrm_supplier,
+  ufrm_ticket_type, ufrm_ticket_priority, ufrm_ticket_category,
+  ufrm_ticket_category_sub;
 
 procedure Tfrm_webmodule.dssc_clientGetClass(DSServerClass: TDSServerClass;
   var PersistentClass: TPersistentClass);
@@ -191,6 +208,36 @@ procedure Tfrm_webmodule.dssc_resellerGetClass(DSServerClass: TDSServerClass;
   var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_reseller.resellers;
+end;
+
+procedure Tfrm_webmodule.dssc_supplierGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_supplier.suppliers;
+end;
+
+procedure Tfrm_webmodule.dssc_ticket_categoryGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_ticket_category.ticket_categorys;
+end;
+
+procedure Tfrm_webmodule.dssc_ticket_category_subGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_ticket_category_sub.ticket_category_subs;
+end;
+
+procedure Tfrm_webmodule.dssc_ticket_priorityGetClass(
+  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_ticket_priority.ticket_prioritys;
+end;
+
+procedure Tfrm_webmodule.dssc_ticket_typeGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_ticket_type.ticket_types;
 end;
 
 procedure Tfrm_webmodule.dssc_voip_serverGetClass(DSServerClass: TDSServerClass;

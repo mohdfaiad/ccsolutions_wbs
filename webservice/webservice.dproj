@@ -183,6 +183,31 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="ufrm_supplier.pas">
+            <Form>frm_supplier</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ufrm_ticket_type.pas">
+            <Form>frm_ticket_type</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ufrm_ticket_priority.pas">
+            <Form>frm_ticket_priority</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ufrm_ticket_category.pas">
+            <Form>frm_ticket_category</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="ufrm_ticket_category_sub.pas">
+            <Form>frm_ticket_category_sub</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <None Include="js\base64.js"/>
         <None Include="js\serverfunctionexecutor.js"/>
         <None Include="js\json2.js"/>
