@@ -135,7 +135,7 @@ uses ufrm_srvmethod, Web.WebReq, ufrm_print_astpp, ufrm_supplier,
 procedure Tfrm_webmodule.dssc_clientGetClass(DSServerClass: TDSServerClass;
   var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_client.clients;
+  PersistentClass := ufrm_client.Client;
 end;
 
 procedure Tfrm_webmodule.dssc_client_astppGetClass(

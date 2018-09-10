@@ -16,7 +16,7 @@ uses
 
   u_ds_classhelper,
 
-  ufrm_srvmethod;
+  ufrm_srvmethod, FireDAC.Stan.Option;
 
 type
 {$METHODINFO ON}
@@ -25,17 +25,17 @@ type
 
   public
     //FUNCTION GET
-    function Client(const AToken: string): TJSONArray;
+    function Clients(const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptClient: string;
+    function AcceptClients: string;
     //FUNCTION POST
-    function UpdateClient: string;
+    function UpdateClients: string;
     //FUNCTION DELETE
-    function CancelClient(const AToken, ACod: string): string;
+    function CancelClients(const AToken, ACod: string): string;
 
   end;
 
-  clients = class(Tfrm_client)
+  Client = class(Tfrm_client)
 
   end;
 {$METHODINFO OFF}
@@ -49,17 +49,17 @@ implementation
 {$R *.dfm}
 { Tfrm_client }
 
-function Tfrm_client.AcceptClient: string;
+function Tfrm_client.AcceptClients: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_client.CancelClient(const AToken, ACod: string): string;
+function Tfrm_client.CancelClients(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_client.Client(const AToken: string): TJSONArray;
+function Tfrm_client.Clients(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
@@ -71,19 +71,20 @@ begin
   qry     := TFDQuery.Create(Self);
 
   qry.Connection := method.conn_db;
+  qry.FetchOptions.Mode := TFDFetchMode.fmAll;
+  qry.Open(SQL);
 
-  if not AToken.IsEmpty then begin
-    qry.Open(SQL);
+  if not (qry.IsEmpty) then begin
     Result := qry.DataSetToJSON;
   end else begin
-    Result := TJSONArray.Create('Result', 'Data not found');
+    Result := qry.DataSetToJSON;
   end;
 
   GetInvocationMetadata().ResponseCode    := 200;
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_client.UpdateClient: string;
+function Tfrm_client.UpdateClients: string;
 begin
   Result := 'POST';
 end;

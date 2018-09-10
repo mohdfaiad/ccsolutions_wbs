@@ -25,11 +25,11 @@ type
 
   public
     // FUNCTION GET
-    function contract_user_signin(const AId: Int64; const AUsername, APassword: string): TJSONArray;
+    function Logins(const AId: Int64; const AUsername, APassword: string): TJSONArray;
 
   end;
 
-  login = class(Tfrm_login)
+  Login = class(Tfrm_login)
 
   end;
 {$METHODINFO OFF}
@@ -45,7 +45,7 @@ implementation
 
 { Tfrm_login }
 
-function Tfrm_login.contract_user_signin(const AId: Int64; const AUsername, APassword: string): TJSONArray;
+function Tfrm_login.Logins(const AId: Int64; const AUsername, APassword: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
@@ -63,11 +63,12 @@ begin
 
   qry.Connection := method.conn_db;
   qry.Open(SQL);
+  qry.Open(SQL);
 
-  if not(qry.IsEmpty) then begin
+  if not (qry.IsEmpty) then begin
     Result := qry.DataSetToJSON;
   end else begin
-    Result := TJSONArray.Create('Result', 'Data not found');
+    Result := qry.DataSetToJSON;
   end;
 
   GetInvocationMetadata().ResponseCode := 200;

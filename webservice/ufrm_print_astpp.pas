@@ -74,12 +74,12 @@ begin
 
   qry.Connection := method.conn_db;
   qry.FetchOptions.Mode := TFDFetchMode.fmAll;
+  qry.Open(SQL);
 
-  if not AToken.IsEmpty then begin
-    qry.Open(SQL);
+  if not (qry.IsEmpty) then begin
     Result := qry.DataSetToJSON;
   end else begin
-    Result := TJSONArray.Create('Result', 'Data not found');
+    Result := qry.DataSetToJSON;
   end;
 
   GetInvocationMetadata().ResponseCode    := 200;
