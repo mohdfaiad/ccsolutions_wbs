@@ -56,6 +56,8 @@ type
     dssc_ticket_priority: TDSServerClass;
     dssc_ticket_category: TDSServerClass;
     dssc_ticket_category_sub: TDSServerClass;
+    dssc_material: TDSServerClass;
+    dssc_medicine: TDSServerClass;
     procedure dsserverclassGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure dsauthenticationUserAuthorize(Sender: TObject;
@@ -111,6 +113,10 @@ type
       var PersistentClass: TPersistentClass);
     procedure dssc_ticket_category_subGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
+    procedure dssc_materialGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure dssc_medicineGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
   private
     { Private declarations }
     FServerFunctionInvokerAction: TWebActionItem;
@@ -130,7 +136,7 @@ implementation
 
 uses ufrm_srvmethod, Web.WebReq, ufrm_print_astpp, ufrm_supplier,
   ufrm_ticket_type, ufrm_ticket_priority, ufrm_ticket_category,
-  ufrm_ticket_category_sub;
+  ufrm_ticket_category_sub, ufrm_material, ufrm_medicine;
 
 procedure Tfrm_webmodule.dssc_clientGetClass(DSServerClass: TDSServerClass;
   var PersistentClass: TPersistentClass);
@@ -184,6 +190,18 @@ procedure Tfrm_webmodule.dssc_loginGetClass(DSServerClass: TDSServerClass;
   var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_login.login;
+end;
+
+procedure Tfrm_webmodule.dssc_materialGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_material.Material;
+end;
+
+procedure Tfrm_webmodule.dssc_medicineGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_medicine.Medicine;
 end;
 
 procedure Tfrm_webmodule.dssc_phonebookGetClass(

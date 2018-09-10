@@ -226,4 +226,16 @@ object frm_webmodule: Tfrm_webmodule
     Left = 344
     Top = 155
   end
+  object dssc_material: TDSServerClass
+    OnGetClass = dssc_materialGetClass
+    Server = dsserver
+    Left = 344
+    Top = 203
+  end
+  object dssc_medicine: TDSServerClass
+    OnGetClass = dssc_medicineGetClass
+    Server = dsserver
+    Left = 344
+    Top = 251
+  end
 end

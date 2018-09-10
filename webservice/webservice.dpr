@@ -34,7 +34,9 @@ uses
   ufrm_ticket_type in 'ufrm_ticket_type.pas' {frm_ticket_type: TDataModule},
   ufrm_ticket_priority in 'ufrm_ticket_priority.pas' {frm_ticket_priority: TDataModule},
   ufrm_ticket_category in 'ufrm_ticket_category.pas' {frm_ticket_category: TDataModule},
-  ufrm_ticket_category_sub in 'ufrm_ticket_category_sub.pas' {frm_ticket_category_sub: TDataModule};
+  ufrm_ticket_category_sub in 'ufrm_ticket_category_sub.pas' {frm_ticket_category_sub: TDataModule},
+  ufrm_material in 'ufrm_material.pas' {frm_material: TDataModule},
+  ufrm_medicine in 'ufrm_medicine.pas' {frm_medicine: TDataModule};
 
 {$R *.res}
 

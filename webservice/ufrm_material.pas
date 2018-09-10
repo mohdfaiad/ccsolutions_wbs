@@ -1,4 +1,4 @@
-unit ufrm_client;
+unit ufrm_material;
 
 interface
 
@@ -21,52 +21,54 @@ uses
 
 type
 {$METHODINFO ON}
-  Tfrm_client = class(TDataModule)
+  Tfrm_material = class(TDataModule)
   private
 
   public
     //FUNCTION GET
-    function Clients(const AToken: string): TJSONArray;
+    function Materials(const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptClients: string;
+    function AcceptMaterials: string;
     //FUNCTION POST
-    function UpdateClients: string;
+    function UpdateMaterials: string;
     //FUNCTION DELETE
-    function CancelClients(const AToken, ACod: string): string;
+    function CancelMaterials(const AToken, ACod: string): string;
 
   end;
 
-  Client = class(Tfrm_client)
+  Material = class(Tfrm_material)
 
   end;
 {$METHODINFO OFF}
 
 var
-  frm_client: Tfrm_client;
+  frm_material: Tfrm_material;
 
 implementation
 
 {%CLASSGROUP 'System.Classes.TPersistent'}
-{$R *.dfm}
-{ Tfrm_client }
 
-function Tfrm_client.AcceptClients: string;
+{$R *.dfm}
+
+{ Tfrm_material }
+
+function Tfrm_material.AcceptMaterials: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_client.CancelClients(const AToken, ACod: string): string;
+function Tfrm_material.CancelMaterials(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_client.Clients(const AToken: string): TJSONArray;
+function Tfrm_material.Materials(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
   method  : Tfrm_srvmethod;
 begin
-  SQL     := 'call proc_client_read('+ QuotedStr(AToken) +');';
+  SQL     := 'call proc_material_read('+ QuotedStr(AToken) +');';
 
   method  := Tfrm_srvmethod.Create(Self);
   qry     := TFDQuery.Create(Self);
@@ -85,7 +87,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_client.UpdateClients: string;
+function Tfrm_material.UpdateMaterials: string;
 begin
   Result := 'POST';
 end;
