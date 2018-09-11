@@ -36,7 +36,9 @@ uses
   ufrm_ticket_category in 'ufrm_ticket_category.pas' {frm_ticket_category: TDataModule},
   ufrm_ticket_category_sub in 'ufrm_ticket_category_sub.pas' {frm_ticket_category_sub: TDataModule},
   ufrm_material in 'ufrm_material.pas' {frm_material: TDataModule},
-  ufrm_medicine in 'ufrm_medicine.pas' {frm_medicine: TDataModule};
+  ufrm_medicine in 'ufrm_medicine.pas' {frm_medicine: TDataModule},
+  ufrm_insurance in 'ufrm_insurance.pas' {frm_insurance: TDataModule},
+  ufrm_table_price in 'ufrm_table_price.pas' {frm_table_price: TDataModule};
 
 {$R *.res}
 

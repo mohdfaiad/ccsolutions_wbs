@@ -1,4 +1,4 @@
-unit ufrm_enterprise;
+unit ufrm_table_price;
 
 interface
 
@@ -21,28 +21,28 @@ uses
 
 type
 {$METHODINFO ON}
-  Tfrm_enterprise = class(TDataModule)
+  Tfrm_table_price = class(TDataModule)
   private
 
   public
     //FUNCTION GET
-    function Enterprise (const AToken: string): TJSONArray;
+    function TablePrices(const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptEnterprise : string;
+    function AcceptTablePrices: string;
     //FUNCTION POST
-    function UpdateEnterprise : string;
+    function UpdateTablePrices: string;
     //FUNCTION DELETE
-    function CancelEnterprise (const AToken, ACod: string): string;
+    function CancelTablePrices(const AToken, ACod: string): string;
 
   end;
 
-  enterprises = class(Tfrm_enterprise)
+  TablePrice = class(Tfrm_table_price)
 
   end;
 {$METHODINFO OFF}
 
 var
-  frm_enterprise: Tfrm_enterprise;
+  frm_table_price: Tfrm_table_price;
 
 implementation
 
@@ -50,25 +50,25 @@ implementation
 
 {$R *.dfm}
 
-{ Tfrm_enterprise }
+{ Tfrm_table_price }
 
-function Tfrm_enterprise.AcceptEnterprise: string;
+function Tfrm_table_price.AcceptTablePrices: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_enterprise.CancelEnterprise(const AToken, ACod: string): string;
+function Tfrm_table_price.CancelTablePrices(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_enterprise.Enterprise(const AToken: string): TJSONArray;
+function Tfrm_table_price.TablePrices(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
   method  : Tfrm_srvmethod;
 begin
-  SQL     := 'call proc_enterprise_read('+ QuotedStr(AToken) +');';
+  SQL     := 'call proc_table_price_read('+ QuotedStr(AToken) +');';
 
   method  := Tfrm_srvmethod.Create(Self);
   qry     := TFDQuery.Create(Self);
@@ -87,7 +87,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_enterprise.UpdateEnterprise: string;
+function Tfrm_table_price.UpdateTablePrices: string;
 begin
   Result := 'POST';
 end;

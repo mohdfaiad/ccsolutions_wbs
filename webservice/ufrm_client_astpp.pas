@@ -10,13 +10,14 @@ uses
   System.JSON,
 
   FireDAC.Comp.Client,
+  FireDAC.Stan.Option,
 
   Data.DB,
   Data.DBXPlatform,
 
   u_ds_classhelper,
 
-  ufrm_srvmethod, FireDAC.Stan.Option;
+  ufrm_srvmethod;
 
 type
 {$METHODINFO ON}

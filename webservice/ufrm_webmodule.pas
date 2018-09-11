@@ -9,6 +9,7 @@ uses
   Web.HTTPApp,
   Web.WebFileDispatcher,
   Web.HTTPProd,
+  Web.WebReq,
 
   IPPeerServer,
 
@@ -21,10 +22,30 @@ uses
   Datasnap.DSCommonServer,
   Datasnap.DSProxyJavaScript,
   Datasnap.DSHTTP,
-  DataSnap.DSAuth, ufrm_phonebook, ufrm_contract, ufrm_enterprise, ufrm_client,
-  ufrm_contract_user, ufrm_login, ufrm_reseller, ufrm_product,
-  ufrm_client_contract, ufrm_client_contract_iten, ufrm_voip_server,
-  ufrm_client_astpp, ufrm_client_sippulse;
+  DataSnap.DSAuth,
+
+  ufrm_phonebook,
+  ufrm_contract,
+  ufrm_enterprise,
+  ufrm_client,
+  ufrm_contract_user,
+  ufrm_login,
+  ufrm_reseller, ufrm_product,
+  ufrm_client_contract,
+  ufrm_client_contract_iten,
+  ufrm_voip_server,
+  ufrm_client_astpp,
+  ufrm_client_sippulse,
+  ufrm_srvmethod,
+  ufrm_print_astpp,
+  ufrm_supplier,
+  ufrm_ticket_type,
+  ufrm_ticket_priority,
+  ufrm_ticket_category,
+  ufrm_ticket_category_sub,
+  ufrm_material,
+  ufrm_medicine,
+  ufrm_insurance;
 
 type
   Tfrm_webmodule = class(TWebModule)
@@ -37,92 +58,67 @@ type
     webfile: TWebFileDispatcher;
     dsproxygenerator: TDSProxyGenerator;
     dsserverprovider: TDSServerMetaDataProvider;
-    dssc_phonebook: TDSServerClass;
-    dssc_contract: TDSServerClass;
-    dssc_enterprise: TDSServerClass;
-    dssc_contract_user: TDSServerClass;
-    dssc_client: TDSServerClass;
-    dssc_login: TDSServerClass;
-    dssc_reseller: TDSServerClass;
-    dssc_product: TDSServerClass;
-    dssc_client_contract: TDSServerClass;
-    dssc_client_contract_iten: TDSServerClass;
-    dssc_voip_server: TDSServerClass;
-    dssc_client_astpp: TDSServerClass;
-    dssc_client_sippulse: TDSServerClass;
-    dssc_print_astpp: TDSServerClass;
-    dssc_supplier: TDSServerClass;
-    dssc_ticket_type: TDSServerClass;
-    dssc_ticket_priority: TDSServerClass;
-    dssc_ticket_category: TDSServerClass;
-    dssc_ticket_category_sub: TDSServerClass;
-    dssc_material: TDSServerClass;
-    dssc_medicine: TDSServerClass;
-    procedure dsserverclassGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dsauthenticationUserAuthorize(Sender: TObject;
-      EventObject: TDSAuthorizeEventObject; var valid: Boolean);
-    procedure dsauthenticationUserAuthenticate(Sender: TObject;
-      const Protocol, Context, User, Password: string; var valid: Boolean;
-      UserRoles: TStrings);
-    procedure serverfunctionHTMLTag(Sender: TObject; Tag: TTag;
-      const TagString: string; TagParams: TStrings; var ReplaceText: string);
-    procedure WebModuleDefaultAction(Sender: TObject;
-      Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
-    procedure WebModuleBeforeDispatch(Sender: TObject;
-      Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
-    procedure webfileBeforeDispatch(Sender: TObject;
-      const AFileName: string; Request: TWebRequest; Response: TWebResponse;
-      var Handled: Boolean);
+    phonebook: TDSServerClass;
+    contract: TDSServerClass;
+    enterprise: TDSServerClass;
+    contract_user: TDSServerClass;
+    client: TDSServerClass;
+    login: TDSServerClass;
+    reseller: TDSServerClass;
+    product: TDSServerClass;
+    client_contract: TDSServerClass;
+    client_contract_iten: TDSServerClass;
+    voip_server: TDSServerClass;
+    client_astpp: TDSServerClass;
+    client_sippulse: TDSServerClass;
+    print_astpp: TDSServerClass;
+    supplier: TDSServerClass;
+    ticket_type: TDSServerClass;
+    ticket_priority: TDSServerClass;
+    ticket_category: TDSServerClass;
+    ticket_category_sub: TDSServerClass;
+    material: TDSServerClass;
+    medicine: TDSServerClass;
+    insurance: TDSServerClass;
+    table_price: TDSServerClass;
+    procedure dsserverclassGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure dsauthenticationUserAuthorize(Sender: TObject; EventObject: TDSAuthorizeEventObject; var valid: Boolean);
+    procedure dsauthenticationUserAuthenticate(Sender: TObject; const Protocol, Context, User, Password: string; var valid: Boolean; UserRoles: TStrings);
+    procedure serverfunctionHTMLTag(Sender: TObject; Tag: TTag; const TagString: string; TagParams: TStrings; var ReplaceText: string);
+    procedure WebModuleDefaultAction(Sender: TObject; Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
+    procedure WebModuleBeforeDispatch(Sender: TObject; Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
+    procedure webfileBeforeDispatch(Sender: TObject; const AFileName: string; Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
     procedure WebModuleCreate(Sender: TObject);
-    procedure dssc_phonebookGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_contractGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_enterpriseGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_contract_userGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_clientGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_loginGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_resellerGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_productGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_client_contractGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_client_contract_itenGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_voip_serverGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_client_astppGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_client_sippulseGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_print_astppGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_supplierGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_ticket_typeGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_ticket_priorityGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_ticket_categoryGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_ticket_category_subGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_materialGetClass(DSServerClass: TDSServerClass;
-      var PersistentClass: TPersistentClass);
-    procedure dssc_medicineGetClass(DSServerClass: TDSServerClass;
+    procedure phonebookGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure contractGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure enterpriseGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure contract_userGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure clientGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure loginGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure resellerGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure productGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure client_contractGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure client_contract_itenGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure voip_serverGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure client_astppGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure client_sippulseGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure print_astppGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure supplierGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure ticket_typeGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure ticket_priorityGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure ticket_categoryGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure ticket_category_subGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure materialGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure medicineGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure insuranceGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure table_priceGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
   private
-    { Private declarations }
     FServerFunctionInvokerAction: TWebActionItem;
     function AllowServerFunctionInvoker: Boolean;
+
   public
-    { Public declarations }
+
   end;
 
 var
@@ -132,160 +128,141 @@ implementation
 
 {%CLASSGROUP 'System.Classes.TPersistent'}
 
+uses ufrm_table_price;
+
 {$R *.dfm}
 
-uses ufrm_srvmethod, Web.WebReq, ufrm_print_astpp, ufrm_supplier,
-  ufrm_ticket_type, ufrm_ticket_priority, ufrm_ticket_category,
-  ufrm_ticket_category_sub, ufrm_material, ufrm_medicine;
-
-procedure Tfrm_webmodule.dssc_clientGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.clientGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_client.Client;
 end;
 
-procedure Tfrm_webmodule.dssc_client_astppGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.client_astppGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_client_astpp.client_astpps;
 end;
 
-procedure Tfrm_webmodule.dssc_client_contractGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.client_contractGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_client_contract.client_contracts;
 end;
 
-procedure Tfrm_webmodule.dssc_client_contract_itenGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.client_contract_itenGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_client_contract_iten.client_contract_itens;
 end;
 
-procedure Tfrm_webmodule.dssc_client_sippulseGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.client_sippulseGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_client_sippulse.client_sippulses;
 end;
 
-procedure Tfrm_webmodule.dssc_contractGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.contractGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_contract.contracts;
 end;
 
-procedure Tfrm_webmodule.dssc_contract_userGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.contract_userGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_contract_user.contract_users;
 end;
 
-procedure Tfrm_webmodule.dssc_enterpriseGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.enterpriseGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_enterprise.enterprises;
 end;
 
-procedure Tfrm_webmodule.dssc_loginGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.insuranceGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_insurance.Insurance;
+end;
+
+procedure Tfrm_webmodule.loginGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_login.login;
 end;
 
-procedure Tfrm_webmodule.dssc_materialGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.materialGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_material.Material;
 end;
 
-procedure Tfrm_webmodule.dssc_medicineGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.medicineGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_medicine.Medicine;
 end;
 
-procedure Tfrm_webmodule.dssc_phonebookGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.phonebookGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_phonebook.phonebooks;
 end;
 
-procedure Tfrm_webmodule.dssc_print_astppGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.print_astppGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_print_astpp.print_astpps;
 end;
 
-procedure Tfrm_webmodule.dssc_productGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.productGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_product.products;
 end;
 
-procedure Tfrm_webmodule.dssc_resellerGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.resellerGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_reseller.resellers;
 end;
 
-procedure Tfrm_webmodule.dssc_supplierGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.supplierGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_supplier.suppliers;
 end;
 
-procedure Tfrm_webmodule.dssc_ticket_categoryGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.table_priceGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_table_price.TablePrice;
+end;
+
+procedure Tfrm_webmodule.ticket_categoryGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_ticket_category.ticket_categorys;
 end;
 
-procedure Tfrm_webmodule.dssc_ticket_category_subGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.ticket_category_subGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_ticket_category_sub.ticket_category_subs;
 end;
 
-procedure Tfrm_webmodule.dssc_ticket_priorityGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.ticket_priorityGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_ticket_priority.ticket_prioritys;
 end;
 
-procedure Tfrm_webmodule.dssc_ticket_typeGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.ticket_typeGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_ticket_type.ticket_types;
 end;
 
-procedure Tfrm_webmodule.dssc_voip_serverGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.voip_serverGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_voip_server.voip_servers;
 end;
 
-procedure Tfrm_webmodule.dsserverclassGetClass(
-  DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.dsserverclassGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_srvmethod.methods;
 end;
 
-procedure Tfrm_webmodule.dsauthenticationUserAuthenticate(
-  Sender: TObject; const Protocol, Context, User, Password: string;
-  var valid: Boolean; UserRoles: TStrings);
+procedure Tfrm_webmodule.dsauthenticationUserAuthenticate(Sender: TObject; const Protocol, Context, User, Password: string; var valid: Boolean; UserRoles: TStrings);
 begin
   valid := True;
 end;
 
-procedure Tfrm_webmodule.dsauthenticationUserAuthorize(
-  Sender: TObject; EventObject: TDSAuthorizeEventObject; 
-  var valid: Boolean);
+procedure Tfrm_webmodule.dsauthenticationUserAuthorize(Sender: TObject; EventObject: TDSAuthorizeEventObject; var valid: Boolean);
 begin
   valid := True;
 end;
 
-procedure Tfrm_webmodule.serverfunctionHTMLTag(Sender: TObject; Tag: TTag;
-  const TagString: string; TagParams: TStrings; var ReplaceText: string);
+procedure Tfrm_webmodule.serverfunctionHTMLTag(Sender: TObject; Tag: TTag; const TagString: string; TagParams: TStrings; var ReplaceText: string);
 begin
   if SameText(TagString, 'urlpath') then
     ReplaceText := string(Request.InternalScriptName)
@@ -313,8 +290,7 @@ begin
       ReplaceText := '';
 end;
 
-procedure Tfrm_webmodule.WebModuleDefaultAction(Sender: TObject;
-  Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
+procedure Tfrm_webmodule.WebModuleDefaultAction(Sender: TObject; Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
 begin
   if (Request.InternalPathInfo = '') or (Request.InternalPathInfo = '/')then
     Response.Content := ReverseString.Content
@@ -322,8 +298,7 @@ begin
     Response.SendRedirect(Request.InternalScriptName + '/');
 end;
 
-procedure Tfrm_webmodule.WebModuleBeforeDispatch(Sender: TObject;
-  Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
+procedure Tfrm_webmodule.WebModuleBeforeDispatch(Sender: TObject; Request: TWebRequest; Response: TWebResponse; var Handled: Boolean);
 begin
   if FServerFunctionInvokerAction <> nil then
     FServerFunctionInvokerAction.Enabled := AllowServerFunctionInvoker;
@@ -335,10 +310,7 @@ begin
     (Request.RemoteAddr = '0:0:0:0:0:0:0:1') or (Request.RemoteAddr = '::1');
 end;
 
-procedure Tfrm_webmodule.webfileBeforeDispatch(Sender: TObject;
-  const AFileName: string; Request: TWebRequest; Response: TWebResponse;
-  var Handled: Boolean);
-var
+procedure Tfrm_webmodule.webfileBeforeDispatch(Sender: TObject; const AFileName: string; Request: TWebRequest; Response: TWebResponse; var Handled: Boolean); var
   D1, D2: TDateTime;
 begin
   Handled := False;
