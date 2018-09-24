@@ -6,8 +6,8 @@
     <Transaction>2018/07/14 17:29:06.000.931,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\usrv_const.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\srv_const.pas</Transaction>
     <Transaction>2018/07/14 17:29:13.000.575,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\usrv_method.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\srv_method.dfm</Transaction>
     <Transaction>2018/07/14 17:29:13.000.575,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\usrv_method.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\srv_method.pas</Transaction>
-    <Transaction>2018/07/14 17:29:17.000.648,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\uweb_module.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\web_module.dfm</Transaction>
     <Transaction>2018/07/14 17:29:17.000.648,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\uweb_module.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\web_module.pas</Transaction>
+    <Transaction>2018/07/14 17:29:17.000.648,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\uweb_module.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\web_module.dfm</Transaction>
     <Transaction>2018/07/14 17:29:35.000.463,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_srvmethod.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\usrv_method.dfm</Transaction>
     <Transaction>2018/07/14 17:29:39.000.068,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_web_module.pas=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\uweb_module.pas</Transaction>
     <Transaction>2018/07/14 17:29:39.000.068,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_web_module.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\uweb_module.dfm</Transaction>
@@ -34,6 +34,6 @@
     <Transaction>2018/09/09 21:48:06.000.267,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_material.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\Unit1.dfm</Transaction>
     <Transaction>2018/09/09 22:39:44.000.160,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\Unit1.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_medicine.dfm</Transaction>
     <Transaction>2018/09/10 21:21:08.000.044,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\Unit1.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_insurance.dfm</Transaction>
-    <Transaction>2018/09/10 23:19:54.381,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_table_price.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\Unit1.dfm</Transaction>
+    <Transaction>2018/09/10 23:19:54.000.381,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_table_price.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\Unit1.dfm</Transaction>
   </Transactions>
 </BorlandProject>
