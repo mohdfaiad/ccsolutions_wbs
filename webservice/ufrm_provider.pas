@@ -1,4 +1,4 @@
-unit ufrm_client_contract_iten;
+unit ufrm_provider;
 
 interface
 
@@ -10,38 +10,39 @@ uses
   System.JSON,
 
   FireDAC.Comp.Client,
+  FireDAC.Stan.Option,
 
   Data.DB,
   Data.DBXPlatform,
 
   u_ds_classhelper,
 
-  ufrm_srvmethod, FireDAC.Stan.Option;
+  ufrm_srvmethod;
 
 type
 {$METHODINFO ON}
-  Tfrm_client_contract_iten = class(TDataModule)
+  Tfrm_provider = class(TDataModule)
   private
 
   public
     //FUNCTION GET
-    function ClientContractItens(const AToken: string): TJSONArray;
+    function Providers(const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptClientContractItens: string;
+    function AcceptProviders: string;
     //FUNCTION POST
-    function UpdateClientContractItens: string;
+    function UpdateProviders: string;
     //FUNCTION DELETE
-    function CancelClientContractItens(const AToken, ACod: string): string;
+    function CancelProviders(const AToken, ACod: string): string;
 
   end;
 
-  ClientContractIten = class(Tfrm_client_contract_iten)
+  Provider = class(Tfrm_provider)
 
   end;
 {$METHODINFO OFF}
 
 var
-  frm_client_contract_iten: Tfrm_client_contract_iten;
+  frm_provider: Tfrm_provider;
 
 implementation
 
@@ -49,25 +50,25 @@ implementation
 
 {$R *.dfm}
 
-{ Tfrm_client_contract_iten }
+{ Tfrm_provider }
 
-function Tfrm_client_contract_iten.AcceptClientContractItens: string;
+function Tfrm_provider.AcceptProviders: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_client_contract_iten.CancelClientContractItens(const AToken, ACod: string): string;
+function Tfrm_provider.CancelProviders(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_client_contract_iten.ClientContractItens(const AToken: string): TJSONArray;
+function Tfrm_provider.Providers(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
   method  : Tfrm_srvmethod;
 begin
-  SQL     := 'call proc_client_contract_iten_read('+ QuotedStr(AToken) +')';
+  SQL     := 'call proc_provider_read('+ QuotedStr(AToken) +');';
 
   method  := Tfrm_srvmethod.Create(Self);
   qry     := TFDQuery.Create(Self);
@@ -86,7 +87,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_client_contract_iten.UpdateClientContractItens: string;
+function Tfrm_provider.UpdateProviders: string;
 begin
   Result := 'POST';
 end;

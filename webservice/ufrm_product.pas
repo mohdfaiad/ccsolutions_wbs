@@ -25,17 +25,17 @@ type
 
   public
     //FUNCTION GET
-    function Product(const AToken: string): TJSONArray;
+    function Products(const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptProduct: string;
+    function AcceptProducts: string;
     //FUNCTION POST
-    function UpdateProduct: string;
+    function UpdateProducts: string;
     //FUNCTION DELETE
-    function CancelProduct(const AToken, ACod: string): string;
+    function CancelProducts(const AToken, ACod: string): string;
 
   end;
 
-  products = class(Tfrm_product)
+  Product = class(Tfrm_product)
 
   end;
 {$METHODINFO OFF}
@@ -51,17 +51,17 @@ implementation
 
 { Tfrm_product }
 
-function Tfrm_product.AcceptProduct: string;
+function Tfrm_product.AcceptProducts: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_product.CancelProduct(const AToken, ACod: string): string;
+function Tfrm_product.CancelProducts(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_product.Product(const AToken: string): TJSONArray;
+function Tfrm_product.Products(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
@@ -86,7 +86,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_product.UpdateProduct: string;
+function Tfrm_product.UpdateProducts: string;
 begin
   Result := 'POST';
 end;

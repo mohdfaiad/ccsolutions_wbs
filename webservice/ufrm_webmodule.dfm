@@ -250,4 +250,22 @@ object frm_webmodule: Tfrm_webmodule
     Left = 352
     Top = 347
   end
+  object did: TDSServerClass
+    OnGetClass = didGetClass
+    Server = dsserver
+    Left = 432
+    Top = 11
+  end
+  object provider: TDSServerClass
+    OnGetClass = providerGetClass
+    Server = dsserver
+    Left = 432
+    Top = 59
+  end
+  object client_did: TDSServerClass
+    OnGetClass = client_didGetClass
+    Server = dsserver
+    Left = 432
+    Top = 107
+  end
 end

@@ -25,17 +25,17 @@ type
 
   public
     //FUNCTION GET
-    function Reseller(const AToken: string): TJSONArray;
+    function Resellers(const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptPhonebook : string;
+    function AcceptResellers : string;
     //FUNCTION POST
-    function UpdatePhonebook : string;
+    function UpdateResellers : string;
     //FUNCTION DELETE
-    function CancelPhonebook(const AToken, ACod: string): string;
+    function CancelResellers(const AToken, ACod: string): string;
 
   end;
 
-  resellers = class(Tfrm_reseller)
+  Reseller = class(Tfrm_reseller)
 
   end;
 {$METHODINFO OFF}
@@ -51,17 +51,17 @@ implementation
 
 { Tfrm_reseller }
 
-function Tfrm_reseller.AcceptPhonebook: string;
+function Tfrm_reseller.AcceptResellers: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_reseller.CancelPhonebook(const AToken, ACod: string): string;
+function Tfrm_reseller.CancelResellers(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_reseller.Reseller(const AToken: string): TJSONArray;
+function Tfrm_reseller.Resellers(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
@@ -85,7 +85,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_reseller.UpdatePhonebook: string;
+function Tfrm_reseller.UpdateResellers: string;
 begin
   Result := 'POST';
 end;

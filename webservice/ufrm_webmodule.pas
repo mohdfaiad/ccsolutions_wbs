@@ -81,6 +81,9 @@ type
     medicine: TDSServerClass;
     insurance: TDSServerClass;
     table_price: TDSServerClass;
+    did: TDSServerClass;
+    provider: TDSServerClass;
+    client_did: TDSServerClass;
     procedure dsserverclassGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
     procedure dsauthenticationUserAuthorize(Sender: TObject; EventObject: TDSAuthorizeEventObject; var valid: Boolean);
     procedure dsauthenticationUserAuthenticate(Sender: TObject; const Protocol, Context, User, Password: string; var valid: Boolean; UserRoles: TStrings);
@@ -113,6 +116,12 @@ type
     procedure insuranceGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
     procedure table_priceGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
+    procedure didGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure providerGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure client_didGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
   private
     FServerFunctionInvokerAction: TWebActionItem;
     function AllowServerFunctionInvoker: Boolean;
@@ -128,7 +137,7 @@ implementation
 
 {%CLASSGROUP 'System.Classes.TPersistent'}
 
-uses ufrm_table_price;
+uses ufrm_table_price, ufrm_did, ufrm_provider, ufrm_client_did;
 
 {$R *.dfm}
 
@@ -144,12 +153,18 @@ end;
 
 procedure Tfrm_webmodule.client_contractGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_client_contract.client_contracts;
+  PersistentClass := ufrm_client_contract.ClientContract;
 end;
 
 procedure Tfrm_webmodule.client_contract_itenGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_client_contract_iten.client_contract_itens;
+  PersistentClass := ufrm_client_contract_iten.ClientContractIten;
+end;
+
+procedure Tfrm_webmodule.client_didGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_client_did.ClientDID;
 end;
 
 procedure Tfrm_webmodule.client_sippulseGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
@@ -204,12 +219,18 @@ end;
 
 procedure Tfrm_webmodule.productGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_product.products;
+  PersistentClass := ufrm_product.Product;
+end;
+
+procedure Tfrm_webmodule.providerGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_provider.Provider;
 end;
 
 procedure Tfrm_webmodule.resellerGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_reseller.resellers;
+  PersistentClass := ufrm_reseller.Reseller;
 end;
 
 procedure Tfrm_webmodule.supplierGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
@@ -250,6 +271,12 @@ end;
 procedure Tfrm_webmodule.dsserverclassGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_srvmethod.methods;
+end;
+
+procedure Tfrm_webmodule.didGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_did.DID;
 end;
 
 procedure Tfrm_webmodule.dsauthenticationUserAuthenticate(Sender: TObject; const Protocol, Context, User, Password: string; var valid: Boolean; UserRoles: TStrings);

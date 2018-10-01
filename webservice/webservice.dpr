@@ -38,7 +38,10 @@ uses
   ufrm_material in 'ufrm_material.pas' {frm_material: TDataModule},
   ufrm_medicine in 'ufrm_medicine.pas' {frm_medicine: TDataModule},
   ufrm_insurance in 'ufrm_insurance.pas' {frm_insurance: TDataModule},
-  ufrm_table_price in 'ufrm_table_price.pas' {frm_table_price: TDataModule};
+  ufrm_table_price in 'ufrm_table_price.pas' {frm_table_price: TDataModule},
+  ufrm_did in 'ufrm_did.pas' {frm_did: TDataModule},
+  ufrm_provider in 'ufrm_provider.pas' {frm_provider: TDataModule},
+  ufrm_client_did in 'ufrm_client_did.pas' {frm_client_did: TDataModule};
 
 {$R *.res}
 
