@@ -45,7 +45,13 @@ uses
   ufrm_ticket_category_sub,
   ufrm_material,
   ufrm_medicine,
-  ufrm_insurance;
+  ufrm_insurance,
+  ufrm_table_price,
+  ufrm_did,
+  ufrm_provider,
+  ufrm_client_did,
+  ufrm_proposal_contract,
+  ufrm_proposal_contract_iten;
 
 type
   Tfrm_webmodule = class(TWebModule)
@@ -84,6 +90,8 @@ type
     did: TDSServerClass;
     provider: TDSServerClass;
     client_did: TDSServerClass;
+    proposal_contract: TDSServerClass;
+    proposal_contract_iten: TDSServerClass;
     procedure dsserverclassGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
     procedure dsauthenticationUserAuthorize(Sender: TObject; EventObject: TDSAuthorizeEventObject; var valid: Boolean);
     procedure dsauthenticationUserAuthenticate(Sender: TObject; const Protocol, Context, User, Password: string; var valid: Boolean; UserRoles: TStrings);
@@ -122,6 +130,10 @@ type
       var PersistentClass: TPersistentClass);
     procedure client_didGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
+    procedure proposal_contractGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure proposal_contract_itenGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
   private
     FServerFunctionInvokerAction: TWebActionItem;
     function AllowServerFunctionInvoker: Boolean;
@@ -136,8 +148,6 @@ var
 implementation
 
 {%CLASSGROUP 'System.Classes.TPersistent'}
-
-uses ufrm_table_price, ufrm_did, ufrm_provider, ufrm_client_did;
 
 {$R *.dfm}
 
@@ -222,8 +232,17 @@ begin
   PersistentClass := ufrm_product.Product;
 end;
 
-procedure Tfrm_webmodule.providerGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.proposal_contractGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_proposal_contract.ProposalContract;
+end;
+
+procedure Tfrm_webmodule.proposal_contract_itenGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_proposal_contract_iten.ProposalContractIten
+end;
+
+procedure Tfrm_webmodule.providerGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_provider.Provider;
 end;
@@ -273,8 +292,7 @@ begin
   PersistentClass := ufrm_srvmethod.methods;
 end;
 
-procedure Tfrm_webmodule.didGetClass(DSServerClass: TDSServerClass;
-  var PersistentClass: TPersistentClass);
+procedure Tfrm_webmodule.didGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_did.DID;
 end;

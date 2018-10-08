@@ -268,4 +268,16 @@ object frm_webmodule: Tfrm_webmodule
     Left = 432
     Top = 107
   end
+  object proposal_contract: TDSServerClass
+    OnGetClass = proposal_contractGetClass
+    Server = dsserver
+    Left = 432
+    Top = 155
+  end
+  object proposal_contract_iten: TDSServerClass
+    OnGetClass = proposal_contract_itenGetClass
+    Server = dsserver
+    Left = 432
+    Top = 203
+  end
 end
