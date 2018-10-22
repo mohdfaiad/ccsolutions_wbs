@@ -26,17 +26,17 @@ type
 
   public
     //FUNCTION GET
-    function TicketCategorySub (const AToken: string): TJSONArray;
+    function TicketCategorySubs (const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptTicketCategorySub : string;
+    function AcceptTicketCategorySubs : string;
     //FUNCTION POST
-    function UpdateTicketCategorySub : string;
+    function UpdateTicketCategorySubs : string;
     //FUNCTION DELETE
-    function CancelTicketCategorySub (const AToken, ACod: string): string;
+    function CancelTicketCategorySubs (const AToken, ACod: string): string;
 
   end;
 
-  ticket_category_subs = class(Tfrm_ticket_category_sub)
+  TicketCategorySub = class(Tfrm_ticket_category_sub)
 
   end;
 {$METHODINFO OFF}
@@ -52,18 +52,18 @@ implementation
 
 { Tfrm_ticket_category_sub }
 
-function Tfrm_ticket_category_sub.AcceptTicketCategorySub: string;
+function Tfrm_ticket_category_sub.AcceptTicketCategorySubs: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_ticket_category_sub.CancelTicketCategorySub(const AToken,
+function Tfrm_ticket_category_sub.CancelTicketCategorySubs(const AToken,
   ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_ticket_category_sub.TicketCategorySub(const AToken: string): TJSONArray;
+function Tfrm_ticket_category_sub.TicketCategorySubs(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
@@ -88,7 +88,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_ticket_category_sub.UpdateTicketCategorySub: string;
+function Tfrm_ticket_category_sub.UpdateTicketCategorySubs: string;
 begin
   Result := 'POST';
 end;

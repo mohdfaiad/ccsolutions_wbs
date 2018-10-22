@@ -10,13 +10,14 @@ uses
   System.JSON,
 
   FireDAC.Comp.Client,
+  FireDAC.Stan.Option,
 
   Data.DB,
   Data.DBXPlatform,
 
   u_ds_classhelper,
 
-  ufrm_srvmethod, FireDAC.Stan.Option;
+  ufrm_srvmethod;
 
 type
 {$METHODINFO ON}
@@ -25,17 +26,17 @@ type
 
   public
     //FUNCTION GET
-    function TicketType (const AToken: string): TJSONArray;
+    function TicketTypes (const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptTicketType : string;
+    function AcceptTicketTypes : string;
     //FUNCTION POST
-    function UpdateTicketType : string;
+    function UpdateTicketTypes : string;
     //FUNCTION DELETE
-    function CancelTicketType (const AToken, ACod: string): string;
+    function CancelTicketTypes (const AToken, ACod: string): string;
 
   end;
 
-  ticket_types = class(Tfrm_ticket_type)
+  TicketType = class(Tfrm_ticket_type)
 
   end;
 {$METHODINFO OFF}
@@ -51,17 +52,17 @@ implementation
 
 { Tfrm_ticket_type }
 
-function Tfrm_ticket_type.AcceptTicketType: string;
+function Tfrm_ticket_type.AcceptTicketTypes: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_ticket_type.CancelTicketType(const AToken, ACod: string): string;
+function Tfrm_ticket_type.CancelTicketTypes(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_ticket_type.TicketType(const AToken: string): TJSONArray;
+function Tfrm_ticket_type.TicketTypes(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
@@ -86,7 +87,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_ticket_type.UpdateTicketType: string;
+function Tfrm_ticket_type.UpdateTicketTypes: string;
 begin
   Result := 'POST';
 end;

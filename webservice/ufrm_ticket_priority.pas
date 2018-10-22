@@ -10,13 +10,14 @@ uses
   System.JSON,
 
   FireDAC.Comp.Client,
+  FireDAC.Stan.Option,
 
   Data.DB,
   Data.DBXPlatform,
 
   u_ds_classhelper,
 
-  ufrm_srvmethod, FireDAC.Stan.Option;
+  ufrm_srvmethod;
 
 type
 {$METHODINFO ON}
@@ -25,17 +26,17 @@ type
 
   public
     //FUNCTION GET
-    function TicketPriority (const AToken: string): TJSONArray;
+    function TicketPrioritys (const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptTicketPriority : string;
+    function AcceptTicketPrioritys : string;
     //FUNCTION POST
-    function UpdateTicketPriority : string;
+    function UpdateTicketPrioritys : string;
     //FUNCTION DELETE
-    function CancelTicketPriority (const AToken, ACod: string): string;
+    function CancelTicketPrioritys (const AToken, ACod: string): string;
 
   end;
 
-  ticket_prioritys = class(Tfrm_ticket_priority)
+  TicketPriority = class(Tfrm_ticket_priority)
 
   end;
 {$METHODINFO OFF}
@@ -51,18 +52,18 @@ implementation
 
 { Tfrm_ticket_priority }
 
-function Tfrm_ticket_priority.AcceptTicketPriority: string;
+function Tfrm_ticket_priority.AcceptTicketPrioritys: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_ticket_priority.CancelTicketPriority(const AToken,
+function Tfrm_ticket_priority.CancelTicketPrioritys(const AToken,
   ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_ticket_priority.TicketPriority(const AToken: string): TJSONArray;
+function Tfrm_ticket_priority.TicketPrioritys(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
@@ -87,7 +88,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_ticket_priority.UpdateTicketPriority: string;
+function Tfrm_ticket_priority.UpdateTicketPrioritys: string;
 begin
   Result := 'POST';
 end;

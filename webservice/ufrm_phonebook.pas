@@ -26,17 +26,17 @@ type
 
   public
     //FUNCTION GET
-    function Phonebook (const AToken: string): TJSONArray;
+    function Phonebooks (const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptPhonebook : string;
+    function AcceptPhonebooks : string;
     //FUNCTION POST
-    function UpdatePhonebook : string;
+    function UpdatePhonebooks : string;
     //FUNCTION DELETE
-    function CancelPhonebook (const AToken, ACod: string): string;
+    function CancelPhonebooks (const AToken, ACod: string): string;
 
   end;
 
-  phonebooks = class(Tfrm_phonebook)
+  Phonebook = class(Tfrm_phonebook)
 
   end;
 {$METHODINFO OFF}
@@ -50,12 +50,12 @@ implementation
 
 {$R *.dfm}
 
-function Tfrm_phonebook.CancelPhonebook(const AToken, ACod: string): string;
+function Tfrm_phonebook.CancelPhonebooks(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_phonebook.Phonebook(const AToken: string): TJSONArray;
+function Tfrm_phonebook.Phonebooks(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
@@ -79,12 +79,12 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_phonebook.AcceptPhonebook: string;
+function Tfrm_phonebook.AcceptPhonebooks: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_phonebook.UpdatePhonebook: string;
+function Tfrm_phonebook.UpdatePhonebooks: string;
 begin
   Result := 'POST';
 end;

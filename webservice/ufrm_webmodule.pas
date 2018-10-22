@@ -219,7 +219,7 @@ end;
 
 procedure Tfrm_webmodule.phonebookGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_phonebook.phonebooks;
+  PersistentClass := ufrm_phonebook.Phonebook;
 end;
 
 procedure Tfrm_webmodule.print_astppGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
@@ -264,22 +264,22 @@ end;
 
 procedure Tfrm_webmodule.ticket_categoryGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_ticket_category.ticket_categorys;
+  PersistentClass := ufrm_ticket_category.TicketCategory;
 end;
 
 procedure Tfrm_webmodule.ticket_category_subGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_ticket_category_sub.ticket_category_subs;
+  PersistentClass := ufrm_ticket_category_sub.TicketCategorySub;
 end;
 
 procedure Tfrm_webmodule.ticket_priorityGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_ticket_priority.ticket_prioritys;
+  PersistentClass := ufrm_ticket_priority.TicketPriority;
 end;
 
 procedure Tfrm_webmodule.ticket_typeGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_ticket_type.ticket_types;
+  PersistentClass := ufrm_ticket_type.TicketType;
 end;
 
 procedure Tfrm_webmodule.voip_serverGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);

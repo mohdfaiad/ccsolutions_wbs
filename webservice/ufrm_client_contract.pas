@@ -67,7 +67,7 @@ var
   qry     : TFDQuery;
   method  : Tfrm_srvmethod;
 begin
-  SQL     := 'call proc_client_contract_read(' + QuotedStr(AToken) + ');';
+  SQL     := 'call proc_client_contract_read('+ QuotedStr(AToken) +');';
 
   method  := Tfrm_srvmethod.Create(Self);
   qry     := TFDQuery.Create(Self);

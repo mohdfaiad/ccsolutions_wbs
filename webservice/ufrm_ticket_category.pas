@@ -10,13 +10,14 @@ uses
   System.JSON,
 
   FireDAC.Comp.Client,
+  FireDAC.Stan.Option,
 
   Data.DB,
   Data.DBXPlatform,
 
   u_ds_classhelper,
 
-  ufrm_srvmethod, FireDAC.Stan.Option;
+  ufrm_srvmethod;
 
 type
 {$METHODINFO ON}
@@ -25,17 +26,17 @@ type
 
   public
     //FUNCTION GET
-    function TicketCategory (const AToken: string): TJSONArray;
+    function TicketCategorys (const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptTicketCategory : string;
+    function AcceptTicketCategorys : string;
     //FUNCTION POST
-    function UpdateTicketCategory : string;
+    function UpdateTicketCategorys : string;
     //FUNCTION DELETE
-    function CancelTicketCategory (const AToken, ACod: string): string;
+    function CancelTicketCategorys (const AToken, ACod: string): string;
 
   end;
 
-  ticket_categorys = class(Tfrm_ticket_category)
+  TicketCategory = class(Tfrm_ticket_category)
 
   end;
 {$METHODINFO OFF}
@@ -51,18 +52,18 @@ implementation
 
 { Tfrm_ticket_category }
 
-function Tfrm_ticket_category.AcceptTicketCategory: string;
+function Tfrm_ticket_category.AcceptTicketCategorys: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_ticket_category.CancelTicketCategory(const AToken,
+function Tfrm_ticket_category.CancelTicketCategorys(const AToken,
   ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_ticket_category.TicketCategory(const AToken: string): TJSONArray;
+function Tfrm_ticket_category.TicketCategorys(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
@@ -87,7 +88,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_ticket_category.UpdateTicketCategory: string;
+function Tfrm_ticket_category.UpdateTicketCategorys: string;
 begin
   Result := 'POST';
 end;
