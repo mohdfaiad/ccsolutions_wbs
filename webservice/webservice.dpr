@@ -43,7 +43,8 @@ uses
   ufrm_provider in 'ufrm_provider.pas' {frm_provider: TDataModule},
   ufrm_client_did in 'ufrm_client_did.pas' {frm_client_did: TDataModule},
   ufrm_proposal_contract in 'ufrm_proposal_contract.pas' {frm_proposal_contract: TDataModule},
-  ufrm_proposal_contract_iten in 'ufrm_proposal_contract_iten.pas' {frm_proposal_contract_iten: TDataModule};
+  ufrm_proposal_contract_iten in 'ufrm_proposal_contract_iten.pas' {frm_proposal_contract_iten: TDataModule},
+  ufrm_ticket in 'ufrm_ticket.pas' {frm_ticket: TDataModule};
 
 {$R *.res}
 

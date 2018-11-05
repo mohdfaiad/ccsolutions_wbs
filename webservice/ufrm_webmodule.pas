@@ -92,6 +92,7 @@ type
     client_did: TDSServerClass;
     proposal_contract: TDSServerClass;
     proposal_contract_iten: TDSServerClass;
+    ticket: TDSServerClass;
     procedure dsserverclassGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
     procedure dsauthenticationUserAuthorize(Sender: TObject; EventObject: TDSAuthorizeEventObject; var valid: Boolean);
     procedure dsauthenticationUserAuthenticate(Sender: TObject; const Protocol, Context, User, Password: string; var valid: Boolean; UserRoles: TStrings);
@@ -134,6 +135,8 @@ type
       var PersistentClass: TPersistentClass);
     procedure proposal_contract_itenGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
+    procedure ticketGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
   private
     FServerFunctionInvokerAction: TWebActionItem;
     function AllowServerFunctionInvoker: Boolean;
@@ -148,6 +151,8 @@ var
 implementation
 
 {%CLASSGROUP 'System.Classes.TPersistent'}
+
+uses ufrm_ticket;
 
 {$R *.dfm}
 
@@ -184,12 +189,12 @@ end;
 
 procedure Tfrm_webmodule.contractGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_contract.contracts;
+  PersistentClass := ufrm_contract.Contract;
 end;
 
 procedure Tfrm_webmodule.contract_userGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
-  PersistentClass := ufrm_contract_user.contract_users;
+  PersistentClass := ufrm_contract_user.ContractUser;
 end;
 
 procedure Tfrm_webmodule.enterpriseGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
@@ -260,6 +265,12 @@ end;
 procedure Tfrm_webmodule.table_priceGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := ufrm_table_price.TablePrice;
+end;
+
+procedure Tfrm_webmodule.ticketGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := ufrm_ticket.Ticket;
 end;
 
 procedure Tfrm_webmodule.ticket_categoryGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);

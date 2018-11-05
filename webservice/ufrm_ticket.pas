@@ -1,4 +1,4 @@
-unit ufrm_contract_user;
+unit ufrm_ticket;
 
 interface
 
@@ -21,28 +21,28 @@ uses
 
 type
 {$METHODINFO ON}
-  Tfrm_contract_user = class(TDataModule)
+  Tfrm_ticket = class(TDataModule)
   private
 
   public
     //FUNCTION GET
-    function ContractUsers (const AToken: string): TJSONArray;
+    function Tickets (const AToken: string): TJSONArray;
     //FUNCTION PUT
-    function AcceptContractUsers : string;
+    function AcceptTickets : string;
     //FUNCTION POST
-    function UpdateContractUsers : string;
+    function UpdateTickets : string;
     //FUNCTION DELETE
-    function CancelContractUsers (const AToken, ACod: string): string;
+    function CancelTickets (const AToken, ACod: string): string;
 
   end;
 
-  ContractUser = class(Tfrm_contract_user)
+  Ticket = class(Tfrm_ticket)
 
   end;
 {$METHODINFO OFF}
 
 var
-  frm_contract_user: Tfrm_contract_user;
+  frm_ticket: Tfrm_ticket;
 
 implementation
 
@@ -50,25 +50,25 @@ implementation
 
 {$R *.dfm}
 
-{ Tfrm_contract_user }
+{ Tfrm_ticket }
 
-function Tfrm_contract_user.AcceptContractUsers: string;
+function Tfrm_ticket.AcceptTickets: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_contract_user.CancelContractUsers(const AToken, ACod: string): string;
+function Tfrm_ticket.CancelTickets(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_contract_user.ContractUsers(const AToken: string): TJSONArray;
+function Tfrm_ticket.Tickets(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
   method  : Tfrm_srvmethod;
 begin
-  SQL     := 'call proc_contract_user_read('+ QuotedStr(AToken) +');';
+  SQL     := 'call proc_ticket_read('+ QuotedStr(AToken) +');';
 
   method  := Tfrm_srvmethod.Create(Self);
   qry     := TFDQuery.Create(Self);
@@ -87,7 +87,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_contract_user.UpdateContractUsers: string;
+function Tfrm_ticket.UpdateTickets: string;
 begin
   Result := 'POST';
 end;

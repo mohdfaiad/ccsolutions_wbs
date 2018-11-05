@@ -253,31 +253,37 @@ object frm_webmodule: Tfrm_webmodule
   object did: TDSServerClass
     OnGetClass = didGetClass
     Server = dsserver
-    Left = 432
+    Left = 456
     Top = 11
   end
   object provider: TDSServerClass
     OnGetClass = providerGetClass
     Server = dsserver
-    Left = 432
+    Left = 456
     Top = 59
   end
   object client_did: TDSServerClass
     OnGetClass = client_didGetClass
     Server = dsserver
-    Left = 432
+    Left = 456
     Top = 107
   end
   object proposal_contract: TDSServerClass
     OnGetClass = proposal_contractGetClass
     Server = dsserver
-    Left = 432
+    Left = 456
     Top = 155
   end
   object proposal_contract_iten: TDSServerClass
     OnGetClass = proposal_contract_itenGetClass
     Server = dsserver
-    Left = 432
+    Left = 456
     Top = 203
+  end
+  object ticket: TDSServerClass
+    OnGetClass = ticketGetClass
+    Server = dsserver
+    Left = 456
+    Top = 251
   end
 end

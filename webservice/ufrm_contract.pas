@@ -25,17 +25,17 @@ type
 
     public
       //FUNCTION GET
-      function Contract (const AToken: string): TJSONArray;
+      function Contracts (const AToken: string): TJSONArray;
       //FUNCTION PUT
-      function AcceptContract : string;
+      function AcceptContracts : string;
       //FUNCTION POST
-      function UpdateContract : string;
+      function UpdateContracts : string;
       //FUNCTION DELETE
-      function CancelContract (const AToken, ACod: string): string;
+      function CancelContracts (const AToken, ACod: string): string;
 
   end;
 
-  contracts = class(Tfrm_contract)
+  Contract = class(Tfrm_contract)
 
   end;
 {$METHODINFO OFF}
@@ -51,17 +51,17 @@ implementation
 
 { Tfrm_contract }
 
-function Tfrm_contract.AcceptContract: string;
+function Tfrm_contract.AcceptContracts: string;
 begin
   Result := 'PUT';
 end;
 
-function Tfrm_contract.CancelContract(const AToken, ACod: string): string;
+function Tfrm_contract.CancelContracts(const AToken, ACod: string): string;
 begin
   Result := 'DELETE';
 end;
 
-function Tfrm_contract.Contract(const AToken: string): TJSONArray;
+function Tfrm_contract.Contracts(const AToken: string): TJSONArray;
 var
   SQL     : string;
   qry     : TFDQuery;
@@ -86,7 +86,7 @@ begin
   GetInvocationMetadata().ResponseContent := Result.ToString;
 end;
 
-function Tfrm_contract.UpdateContract: string;
+function Tfrm_contract.UpdateContracts: string;
 begin
   Result := 'POST';
 end;
