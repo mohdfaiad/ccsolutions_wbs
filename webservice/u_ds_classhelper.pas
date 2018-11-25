@@ -48,16 +48,15 @@ begin
             lJO.AddPair(Fields[lCol].FieldName, '')
           else
             begin
-              if (Fields[lCol].IsBlob) and (Fields[lCol].DisplayName <> 'ctr_usr_cod') and (Fields[lCol].DisplayName <> 'ctr_token') and (Fields[lCol].DisplayName <> 'ctr_cod') then
+              if (Fields[lCol].IsBlob) and (Fields[lCol].DisplayName <> 'ctr_usr_cod') and (Fields[lCol].DisplayName <> 'ctr_token') and
+                  (Fields[lCol].DisplayName <> 'ctr_cod') and (Fields[lCol].DisplayName <> 'pro_annotation')then
                 begin
                   StreamIn := CreateBlobStream(Fields[lCol], bmRead);
                   StreamOut := TStringStream.Create;
                   TNetEncoding.Base64.Encode(StreamIn, StreamOut);
                   StreamOut.Position := 0;
                   lJO.AddPair(Fields[lCol].DisplayName, StreamOut.DataString);
-                end
-              else
-                begin
+                end else begin
                   if Fields[lCol].DataType in [ftCurrency, ftFloat, ftInteger, ftSmallint, ftSingle ] then
                     lJO.AddPair(Fields[lCol].FieldName,
                                 TJSONNumber.Create(Fields[lcol].Value))
