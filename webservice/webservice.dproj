@@ -1,12 +1,12 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{4C41AE36-F436-45A7-8244-7A934BD70158}</ProjectGuid>
-        <ProjectVersion>18.4</ProjectVersion>
+        <ProjectVersion>18.5</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <MainSource>webservice.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Linux64</Platform>
         <TargetedPlatforms>129</TargetedPlatforms>
         <AppType>Console</AppType>
     </PropertyGroup>
@@ -66,6 +66,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <Manifest_File>(None)</Manifest_File>
         <DCC_ExeOutput>C:\ccsolutions_wbs\webservice\linux64\</DCC_ExeOutput>
         <DCC_DcuOutput>C:\temp\ccsolutions_wbs\webservice\.\$(Platform)\$(Config)</DCC_DcuOutput>
+        <DCC_UnitSearchPath>$(fmxlinux)\Lib\$(ProductVersion)\$(Config);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;dxPSPrVwRibbonRS25;dxRibbonCustomizationFormRS25;DBXDb2Driver;dxSkinOffice2007PinkRS25;dxSkinMcSkinRS25;vclactnband;vclFireDAC;cxExportRS25;dxHttpIndyRequestRS25;tethering;dxPScxCommonRS25;FireDACADSDriver;cxPivotGridOLAPRS25;ACBr_BPe;FireDACMSSQLDriver;cxSchedulerGridRS25;vcltouch;dxSkinDarkRoomRS25;dxSkinDarkSideRS25;vcldb;tmsxlsdXE11;svn;ACBr_NFe;ACBr_NFeDanfeFR;ACBr_NFeDanfeESCPOS;dxGaugeControlRS25;QImport3RT_D25;cxLibraryRS25;dxSkinOffice2007SilverRS25;dxSkinscxSchedulerPainterRS25;dxSkinBlackRS25;vclib;dxSkinOffice2007BlueRS25;dxSkinOffice2007BlackRS25;FireDACDBXDriver;ACBr_NFSeDanfseFR;dxSkinVS2010RS25;vclx;dxSkinFoggyRS25;dxSpreadSheetConditionalFormattingDialogsRS25;dxSkinSevenRS25;dxSkinSpringTimeRS25;dxTileControlRS25;ACBr_SATExtratoRL;dxMapControlRS25;dxPDFViewerRS25;dxDockingRS25;ACBr_Reinf;VCLRESTComponents;dxSkinsdxNavBarPainterRS25;cxPageControlRS25;dxSkinLilianRS25;dxPSLnksRS25;dxWizardControlRS25;dxRichEditControlRS25;vclie;fs25;bindengine;dxFireDACServerModeRS25;ACBr_PAF;FireDACMySQLDriver;ACBr_SATECFVirtual;dxSkinOffice2013LightGrayRS25;dxSkinMetropolisRS25;DataSnapClient;dxPSdxPDFViewerLnkRS25;dxSkinOffice2016DarkRS25;bindcompdbx;dxSkinBlueprintRS25;ACBr_TCP;dxSkinStardustRS25;DBXSybaseASEDriver;IndyIPServer;dxPSdxLCLnkRS25;ACBr_CTe;ACBr_CTeDacteRL;IndySystem;dxSkinOffice2007GreenRS25;dsnapcon;ACBr_synapse;ACBre_Social;dxLayoutControlRS25;dxPSRichEditControlLnkRS25;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;fsADO25;dxdbtrRS25;ACBr_SPEDImportar;dxPScxTLLnkRS25;ACBr_SPED;ACBr_MDFe;emshosting;dxSpreadSheetRS25;dxSkinVisualStudio2013LightRS25;ACBr_BoletoRL;ACBr_LFD;frxADO25;DBXOdbcDriver;FireDACTDataDriver;FMXTee;cxGridRS25;dxSkinTheAsphaltWorldRS25;DbxCommonDriver;dxPScxSchedulerLnkRS25;dxorgcRS25;frxFD25;ACBr_NFSeDanfseRL;dxSkinHighContrastRS25;xmlrtl;DataSnapNativeClient;fmxobj;dxPScxGridLnkRS25;frx25;rtl;DbxClientDriver;DBXSybaseASADriver;dxPSCoreRS25;dxmdsRS25;dxSkinOffice2016ColorfulRS25;fsDB25;ACBr_Convenio115;appanalytics;IndyIPClient;bindcompvcl;dxSkinscxPCPainterRS25;dxThemeRS25;TeeUI;VclSmp;FireDACODBCDriver;DataSnapIndy10ServerTransport;ACBr_Boleto;DataSnapProviderClient;frxIBX25;FireDACMongoDBDriver;cxVerticalGridRS25;dxtrmdRS25;ACBr_SEF2;ACBr_MDFeDamdfeFR;ACBr_NFSe;dxADOServerModeRS25;dxSkinPumpkinRS25;DataSnapServerMidas;dxCoreRS25;cxSchedulerTreeBrowserRS25;dxSkinValentineRS25;DBXInterBaseDriver;frxcs25;ACBr_TEFD;dxPSTeeChartRS25;svnui;dxSkinOffice2010BlueRS25;ACBr_SATWS;dxSkinMoneyTwinsRS25;frxe25;dxSkinSilverRS25;DBXMSSQLDriver;dxPSdxFCLnkRS25;ACBr_MDFeDamdfeRL;DatasnapConnectorsFreePascal;dxSkinOffice2013WhiteRS25;bindcompfmx;DBXOracleDriver;fsIBX25;inetdb;ACBr_Diversos;dxOfficeCoreRS25;ACBr_TXTComum;ACBr_GNREGuiaFR;FmxTeeUI;emsedge;fmx;fmxdae;dxSkinBlueRS25;dxTabbedMDIRS25;dxBarDBNavRS25;dxPScxPivotGridLnkRS25;frxDB25;tmsdXE11;frxTee25;dxSkinDevExpressDarkStyleRS25;ACBr_Ponto;ACBr_CTeDacteFR;tmsexdXE11;dbexpress;IndyCore;dxFlowChartRS25;dxSkinsdxDLPainterRS25;dsnap;DataSnapCommon;fsTee25;dxBarRS25;dxPSDBTeeChartRS25;ACBr_PCNComum;dxSkinLiquidSkyRS25;dxdborRS25;DataSnapConnectors;ACBR_DeSTDA;dxPScxExtCommonRS25;ACBr_SAT;cxPivotGridRS25;dxPSdxSpreadSheetLnkRS25;dxSpreadSheetReportDesignerRS25;dxNavBarRS25;TCloudFalcon;cxSchedulerRibbonStyleEventEditorRS25;dxSkinCoffeeRS25;FireDACOracleDriver;DBXMySQLDriver;QExport4RT_D25;DBXFirebirdDriver;ACBr_Sintegra;FireDACCommonODBC;dxSkinOffice2010SilverRS25;ACBr_GNRE;cxTreeListRS25;dxSkinsdxBarPainterRS25;IndyIPCommon;dxSkinLondonLiquidSkyRS25;vcl;dxPScxVGridLnkRS25;ACBr_NFeDanfeRL;dxBarExtItemsRS25;ACBr_SATExtratoESCPOS;dxSkinsCoreRS25;dxComnRS25;FireDACDb2Driver;dxSkinWhiteprintRS25;dxPSdxDBTVLnkRS25;ACBr_Integrador;dxSkinVisualStudio2013BlueRS25;dxSkinGlassOceansRS25;dxSkinMetropolisDarkRS25;dxSkinOffice2013DarkGrayRS25;dxSkinSharpPlusRS25;TeeDB;dxSkinCaramelRS25;dxServerModeRS25;dxPScxPCProdRS25;ACBr_Comum;FireDACPgDriver;ibmonitor;FireDACASADriver;cxEditorsRS25;dxSkiniMaginaryRS25;ACBr_GNREGuiaRL;ibxpress;Tee;DataSnapServer;ibxbindings;dxPsPrVwAdvRS25;vclwinx;FireDACDSDriver;dxSkinSevenClassicRS25;cxDataRS25;cxTreeListdxBarPopupMenuRS25;ACBr_OpenSSL;ACBr_DFeComum;CustomIPTransport;vcldsnap;dxPSdxOCLnkRS25;dxSkinSharpRS25;frxIntIO25;bindcomp;tmswizdXE11;ACBr_Serial;DBXInformixDriver;cxPivotGridChartRS25;cxSchedulerRS25;dxBarExtDBItemsRS25;dxSkinVisualStudio2013DarkRS25;dxSkinOffice2010BlackRS25;frce;dxDBXServerModeRS25;dxSkinDevExpressStyleRS25;dxGDIPlusRS25;dxPSdxGaugeControlLnkRS25;dxSkinsdxRibbonPainterRS25;frxDBX25;ACBr_BlocoX;dbxcds;ACBr_NFCeECFVirtual;adortl;ACBr_BoletoFR;dxPSdxDBOCLnkRS25;ACBr_ANe;dxRibbonRS25;dsnapxml;dxSpellCheckerRS25;dbrtl;inetdbxpress;IndyProtocols;dxSkinSummer2008RS25;ACBr_MTER;dxPSdxMapControlLnkRS25;dxSkinXmas2008BlueRS25;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -308,10 +309,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 </Source>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="images\collapse.png" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="js\base64.js" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win64">
-                        <RemoteDir>.\images\</RemoteDir>
-                        <RemoteName>collapse.png</RemoteName>
+                        <RemoteDir>.\js\</RemoteDir>
+                        <RemoteName>base64.js</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -673,6 +674,11 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\osx64\libcgsqlite3.dylib" Class="DependencyModule">
+                    <Platform Name="OSX64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="js\serverfunctioninvoker.js" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Linux64">
                         <RemoteDir>.\js\</RemoteDir>
@@ -978,6 +984,11 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
+                    <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="css\main.css" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\css\</RemoteDir>
@@ -1030,10 +1041,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="js\base64.js" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="images\collapse.png" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win64">
-                        <RemoteDir>.\js\</RemoteDir>
-                        <RemoteName>base64.js</RemoteName>
+                        <RemoteDir>.\images\</RemoteDir>
+                        <RemoteName>collapse.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -1042,13 +1053,18 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="Win32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
                         <Operation>0</Operation>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="AndroidClassesDexFile">
                     <Platform Name="Android">
                         <RemoteDir>classes</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidFileProvider">
+                    <Platform Name="Android">
+                        <RemoteDir>res\xml</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -1085,6 +1101,12 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 <DeployClass Name="AndroidSplashStyles">
                     <Platform Name="Android">
                         <RemoteDir>res\values</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                </DeployClass>
+                <DeployClass Name="AndroidSplashStylesV21">
+                    <Platform Name="Android">
+                        <RemoteDir>res\values-v21</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -1164,12 +1186,20 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Operation>1</Operation>
                         <Extensions>.framework</Extensions>
                     </Platform>
+                    <Platform Name="OSX64">
+                        <Operation>1</Operation>
+                        <Extensions>.framework</Extensions>
+                    </Platform>
                     <Platform Name="Win32">
                         <Operation>0</Operation>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="DependencyModule">
                     <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX64">
                         <Operation>1</Operation>
                         <Extensions>.dylib</Extensions>
                     </Platform>
@@ -1195,6 +1225,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Operation>1</Operation>
                         <Extensions>.dylib</Extensions>
                     </Platform>
+                    <Platform Name="OSX64">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
                     <Platform Name="Win32">
                         <Operation>0</Operation>
                         <Extensions>.bpl</Extensions>
@@ -1214,6 +1248,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Operation>0</Operation>
                     </Platform>
                     <Platform Name="OSX32">
+                        <Operation>0</Operation>
+                    </Platform>
+                    <Platform Name="OSX64">
                         <Operation>0</Operation>
                     </Platform>
                     <Platform Name="Win32">
@@ -1326,10 +1363,15 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
+                <DeployClass Name="ProjectOSXDebug"/>
                 <DeployClass Name="ProjectOSXEntitlements"/>
                 <DeployClass Name="ProjectOSXInfoPList"/>
                 <DeployClass Name="ProjectOSXResource">
                     <Platform Name="OSX32">
+                        <RemoteDir>Contents\Resources</RemoteDir>
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX64">
                         <RemoteDir>Contents\Resources</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
@@ -1352,6 +1394,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="OSX32">
+                        <Operation>1</Operation>
+                    </Platform>
+                    <Platform Name="OSX64">
                         <Operation>1</Operation>
                     </Platform>
                     <Platform Name="Win32">
@@ -1393,6 +1438,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>

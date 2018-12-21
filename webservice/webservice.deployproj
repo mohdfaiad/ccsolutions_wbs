@@ -6,9 +6,9 @@
     <PropertyGroup/>
     <ItemGroup Condition="'$(Platform)'=='iOSDevice64'"/>
     <ItemGroup Condition="'$(Platform)'=='Win64'">
-        <DeployFile Include="images\collapse.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>webservice\images\</RemoteDir>
-            <RemoteName>collapse.png</RemoteName>
+        <DeployFile Include="js\base64.js" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>webservice\js\</RemoteDir>
+            <RemoteName>base64.js</RemoteName>
             <DeployClass>ProjectFile</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
@@ -303,9 +303,9 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="js\base64.js" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>webservice\js\</RemoteDir>
-            <RemoteName>base64.js</RemoteName>
+        <DeployFile Include="images\collapse.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>webservice\images\</RemoteDir>
+            <RemoteName>collapse.png</RemoteName>
             <DeployClass>ProjectFile</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
@@ -342,6 +342,16 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="C:\ccsolutions_wbs\webservice\win32\webservice.exe" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>webservice\</RemoteDir>
+            <RemoteName>webservice.exe</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
         <DeployFile Include="js\json2-min.js" Condition="'$(Config)'=='Release'">
             <RemoteDir>webservice\js\</RemoteDir>
             <RemoteName>json2-min.js</RemoteName>
@@ -359,16 +369,6 @@
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Win32\Debug\webservice.exe" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>webservice\</RemoteDir>
-            <RemoteName>webservice.exe</RemoteName>
-            <DeployClass>ProjectOutput</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-            <Required>True</Required>
         </DeployFile>
         <DeployFile Include="images\expand.png" Condition="'$(Config)'=='Release'">
             <RemoteDir>webservice\images\</RemoteDir>
@@ -984,6 +984,15 @@
         <DeployFile Include="$(BDS)\Redist\iossimulator\libPCRE.dylib">
             <RemoteDir>webservice.app\</RemoteDir>
             <RemoteName>libPCRE.dylib</RemoteName>
+            <DeployClass>DependencyModule</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="$(BDS)\Redist\iossimulator\libpcre.dylib">
+            <RemoteDir>webservice.app\</RemoteDir>
+            <RemoteName>libpcre.dylib</RemoteName>
             <DeployClass>DependencyModule</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
