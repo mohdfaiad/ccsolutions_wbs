@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/12/22 21:09:26.000.551,=C:\Users\Usuario\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/12/26 21:12:07.000.275,=C:\Users\Usuario\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/12/26 21:16:20.000.718,=C:\Users\Usuario\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/12/27 15:25:09.000.155,=C:\Users\Usuario\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/12/27 15:25:45.000.689,C:\Users\Usuario\Documents\Embarcadero\Studio\Projects\Unit1.fmx=C:\development\sources\ccsolutions_wbs\webservice\u_webservice.fmx</Transaction>
+    <Transaction>2018/12/27 15:25:45.000.689,C:\Users\Usuario\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\development\sources\ccsolutions_wbs\webservice\u_webservice.pas</Transaction>
+    <Transaction>2018/12/27 15:25:56.000.891,C:\Users\Usuario\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\development\sources\ccsolutions_wbs\webservice\ufrm_webservice.dproj</Transaction>
+    <Transaction>2018/12/27 15:35:29.000.105,C:\development\sources\ccsolutions_wbs\webservice\ufrm_webservice.dproj=C:\development\sources\ccsolutions_wbs\webservice\webservice.dproj</Transaction>
+    <Transaction>2018/12/27 15:35:35.000.374,C:\development\sources\ccsolutions_wbs\webservice\u_webservice.pas=C:\development\sources\ccsolutions_wbs\webservice\ufrm_webservice.pas</Transaction>
+    <Transaction>2018/12/27 15:35:35.000.374,C:\development\sources\ccsolutions_wbs\webservice\u_webservice.fmx=C:\development\sources\ccsolutions_wbs\webservice\ufrm_webservice.fmx</Transaction>
+    <Transaction>2018/12/27 16:08:41.000.001,=C:\development\sources\ccsolutions_wbs\webservice\Unit1.pas</Transaction>
+    <Transaction>2018/12/27 16:09:14.000.286,C:\development\sources\ccsolutions_wbs\webservice\Unit1.pas=C:\development\sources\ccsolutions_wbs\webservice\ufrm_dm.pas</Transaction>
+    <Transaction>2018/12/27 16:09:14.000.286,C:\development\sources\ccsolutions_wbs\webservice\Unit1.dfm=C:\development\sources\ccsolutions_wbs\webservice\ufrm_dm.dfm</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5" Android=""/>
+	</ActiveMobileDevice>
+</BorlandProject>

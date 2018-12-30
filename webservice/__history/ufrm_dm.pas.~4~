@@ -1,0 +1,28 @@
+unit ufrm_dm;
+
+interface
+
+uses
+  System.SysUtils,
+  System.Classes,
+
+  uDWDataModule;
+
+type
+  Tfrm_dm = class(TServerMethodDataModule)
+  private
+
+  public
+
+  end;
+
+var
+  frm_dm: Tfrm_dm;
+
+implementation
+
+{%CLASSGROUP 'FMX.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

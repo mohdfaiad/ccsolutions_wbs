@@ -1,0 +1,99 @@
+object frm_webservice: Tfrm_webservice
+  Left = 0
+  Top = 0
+  Caption = 'Servidor - Webservice'
+  ClientHeight = 480
+  ClientWidth = 640
+  Position = Designed
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object Panel_1: TPanel
+    Align = Bottom
+    Position.Y = 430.000000000000000000
+    Size.Width = 640.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    object Button_iniciar: TButton
+      Action = Action_iniciar
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 8.000000000000000000
+      Position.Y = 13.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+    end
+    object Button_parar: TButton
+      Action = Action_parar
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 120.000000000000000000
+      Position.Y = 13.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Action = Action_fechar
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 528.000000000000000000
+      Position.Y = 13.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+    end
+  end
+  object service_pooler: TRESTServicePooler
+    Active = False
+    CORS = False
+    ServicePort = 8082
+    ProxyOptions.Port = 8888
+    ServerParams.HasAuthentication = False
+    ServerParams.UserName = 'testserver'
+    ServerParams.Password = 'testserver'
+    SSLMethod = sslvSSLv2
+    SSLVersions = []
+    Encoding = esUtf8
+    ServerContext = 'restdataware'
+    RootPath = '/'
+    SSLVerifyMode = []
+    SSLVerifyDepth = 0
+    ForceWelcomeAccess = False
+    Left = 56
+    Top = 64
+  end
+  object ImageList_1: TImageList
+    Source = <>
+    Destination = <>
+    Left = 56
+    Top = 112
+  end
+  object ActionList_1: TActionList
+    Left = 56
+    Top = 160
+    object Action_iniciar: TAction
+      Text = 'Iniciar'
+      Hint = 'Iniciar Server'
+      OnExecute = Action_iniciarExecute
+    end
+    object Action_parar: TAction
+      Text = 'Parar'
+      Hint = 'Parar Server'
+      OnExecute = Action_pararExecute
+    end
+    object Action_fechar: TAction
+      Text = 'Fechar'
+      Hint = 'Fechar Servidor'
+      OnExecute = Action_fecharExecute
+    end
+  end
+end

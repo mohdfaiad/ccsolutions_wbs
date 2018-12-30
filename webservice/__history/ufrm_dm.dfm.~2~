@@ -1,0 +1,5 @@
+object frm_dm: Tfrm_dm
+  OldCreateOrder = False
+  Height = 150
+  Width = 215
+end

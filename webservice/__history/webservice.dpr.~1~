@@ -1,0 +1,14 @@
+program ufrm_webservice;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  u_webservice in 'u_webservice.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.
