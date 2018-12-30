@@ -1,5 +1,0 @@
-object frm_methods: Tfrm_methods
-  OldCreateOrder = False
-  Height = 150
-  Width = 215
-end
