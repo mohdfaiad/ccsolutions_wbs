@@ -1,0 +1,185 @@
+unit ufrm_cliente;
+
+interface
+
+uses
+  System.SysUtils,
+  System.Classes,
+  System.JSON.Writers,
+  System.JSON.Types,
+  System.JSON.Readers,
+  System.JSON,
+
+  FireDAC.Comp.Client,
+  FireDAC.Stan.Option,
+
+  Data.DB,
+  Data.DBXPlatform,
+
+  u_ds_classhelper,
+
+  ufrm_srvmethod, Web.HTTPApp;
+
+type
+{$METHODINFO ON}
+  Tfrm_cliente = class(TDataModule)
+  private
+
+  public
+    //FUNCTION GET
+    function Clientes(const AToken: string): TJSONArray;
+    //FUNCTION PUT
+    function AcceptClientes: string;
+    //FUNCTION POST
+    function UpdateClientes: TJSONArray;
+    //FUNCTION DELETE
+    function CancelClientes(const AToken, ACod: string): string;
+
+  end;
+
+  Cliente = class(Tfrm_cliente)
+
+  end;
+{$METHODINFO OFF}
+
+var
+  frm_cliente: Tfrm_cliente;
+
+implementation
+
+{%CLASSGROUP 'System.Classes.TPersistent'}
+
+{$R *.dfm}
+
+{ Tfrm_client }
+
+function Tfrm_cliente.AcceptClientes: string;
+begin
+  Result := 'PUT';
+end;
+
+function Tfrm_cliente.CancelClientes(const AToken, ACod: string): string;
+begin
+  Result := 'DELETE';
+end;
+
+function Tfrm_cliente.Clientes(const AToken: string): TJSONArray;
+var
+  SQL     : string;
+  qry     : TFDQuery;
+  method  : Tfrm_srvmethod;
+begin
+  SQL     := 'call proc_cliente_read('+ QuotedStr(AToken) +');';
+
+  method  := Tfrm_srvmethod.Create(Self);
+  qry     := TFDQuery.Create(Self);
+
+  qry.Connection := method.conn_db;
+  qry.FetchOptions.Mode := TFDFetchMode.fmAll;
+  qry.Open(SQL);
+
+  if not (qry.IsEmpty) then begin
+    Result := qry.DataSetToJSON;
+  end else begin
+    Result := qry.DataSetToJSON;
+  end;
+
+  GetInvocationMetadata().ResponseCode    := 200;
+  GetInvocationMetadata().ResponseContent := Result.ToString;
+end;
+
+function Tfrm_cliente.UpdateClientes: TJSONArray;
+var
+  vModule           : TWebModule;
+  vJARequest        : TJSONArray;
+  vJObject          : TJSONObject;
+  vFields, vValues  : TStringList;
+  vLine, vInsert    : TStringBuilder;
+  I, J              : Integer;
+  vSR               : TStringReader;
+  vJR               : TJsonTextReader;
+  method            : Tfrm_srvmethod;
+begin
+  if vModule.Request.Content.IsEmpty then begin
+    GetInvocationMetadata().ResponseCode := 204;
+    Abort
+  end;
+
+  vJARequest        := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(vModule.Request.Content), 0) as TJSONArray;
+  Result            := TJSONArray.Create;
+  vJObject          := TJSONObject.Create;
+  vFields           := TStringList.Create;
+  vValues           := TStringList.Create;
+  vLine             := TStringBuilder.Create;
+  method            := Tfrm_srvmethod.Create(Self);
+
+  try
+    for I := 0 to vJARequest.Count - 1 do begin
+      vSR := TStringReader.Create(vJARequest.Items[I].ToJSON);
+      vJR := TJsonTextReader.Create(vSR);
+      vLine.Clear;
+      vFields.Clear;
+      vValues.Clear;
+      vLine.Append('call proc_cliente_create(') ;
+
+      while vJR.Read do begin
+        if vJR.TokenType = TJsonToken.PropertyName then begin
+          if not vJR.Value.ToString.IsEmpty then begin
+            if vFields.IndexOf(vJR.Value.ToString) = -1 then begin
+              vFields.Append(vJR.Value.ToString);
+              vJR.Read;
+            end;
+
+            if vJR.TokenType in [TJsonToken.String, TJsonToken.Date] then begin
+              if vJR.TokenType = TJsonToken.Date then begin
+                vValues.Append(QuotedStr((FormatDateTime('dd.mm.yyyy', StrToDate(vJR.Value.ToString)))));
+              end else begin
+                if UpperCase(vJR.Value.ToString) <> 'NULL' then begin
+                  vValues.Append(QuotedStr(vJR.Value.ToString));
+                end else begin
+                  vValues.Append(vJR.Value.ToString);
+                end;
+              end;
+            end else begin
+              vValues.Append(vJR.Value.ToString.Replace(',', '.'));
+            end;
+          end;
+        end;
+      end;
+
+      for J := 0 to vFields.Count - 1 do begin
+        if not vFields[J].IsEmpty then begin
+          if J <> vFields.Count - 1 then begin
+            vLine.Append(vFields[J] + ', ');
+          end else begin
+            vLine.Append(vFields[J]);
+          end;
+        end;
+      end;
+
+      vLine.Append(') values (');
+
+      for J := 0 to vValues.Count - 1 do begin
+        if not vValues[J].IsEmpty then begin
+          if J <> vValues.Count - 1 then begin
+            vLine.Append(vValues[J] + ', ');
+          end else begin
+            vLine.Append(vValues[J]);
+          end;
+        end;
+      end;
+
+      vInsert.Append(vLine.ToString + ');');
+    end;
+
+    method.conn_db.TxOptions.AutoCommit := False;
+    if not method.conn_db.InTransaction then begin
+      method.conn_db.StartTransaction;
+    end;
+
+    try
+  finally
+  end;
+end;
+
+end.

@@ -1,0 +1,53 @@
+object frm_dm: Tfrm_dm
+  OldCreateOrder = False
+  Height = 328
+  Width = 428
+  object connDB: TFDConnection
+    Params.Strings = (
+      'ConnectionDef=database')
+    Connected = True
+    LoginPrompt = False
+    Left = 24
+    Top = 16
+  end
+  object waitCursor: TFDGUIxWaitCursor
+    Provider = 'Console'
+    Left = 176
+    Top = 16
+  end
+  object driverLink: TFDPhysMySQLDriverLink
+    VendorHome = 'C:\ccsolutions_wbs\'
+    VendorLib = 'libmysql.dll'
+    Left = 120
+    Top = 16
+  end
+  object mamDB: TFDManager
+    DriverDefFileName = 'C:\ccsolutions_wbs\config\banco.ini'
+    ConnectionDefFileName = 'C:\ccsolutions_wbs\config\banco.ini'
+    FormatOptions.AssignedValues = [fvMapRules]
+    FormatOptions.OwnMapRules = True
+    FormatOptions.MapRules = <>
+    Active = True
+    Left = 72
+    Top = 16
+  end
+  object poolerDB: TRESTDWPoolerDB
+    RESTDriver = driverFD
+    Compression = True
+    Encoding = esUtf8
+    StrsTrim = False
+    StrsEmpty2Null = False
+    StrsTrim2Len = True
+    Active = True
+    PoolerOffMessage = 'RESTPooler not active.'
+    ParamCreate = True
+    Left = 24
+    Top = 128
+  end
+  object driverFD: TRESTDWDriverFD
+    CommitRecords = 100
+    Connection = connDB
+    Left = 24
+    Top = 72
+  end
+end

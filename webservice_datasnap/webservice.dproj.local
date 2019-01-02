@@ -41,5 +41,10 @@
     <Transaction>2018/10/02 08:48:39.000.014,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_proposal_contract.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\Unit1.dfm</Transaction>
     <Transaction>2018/10/02 08:48:48.000.519,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_proposal_contract_iten.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\Unit2.dfm</Transaction>
     <Transaction>2018/11/03 17:50:10.000.822,C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\ufrm_ticket.dfm=C:\development\ccsolutions\ccsolutions_wbs\trunk\webservice\Unit1.dfm</Transaction>
+    <Transaction>2018/12/29 21:56:06.000.754,=C:\development\sources\ccsolutions_wbs\webservice\Unit1.pas</Transaction>
+    <Transaction>2018/12/29 21:56:22.000.286,C:\development\sources\ccsolutions_wbs\webservice\ufrm_clientes.pas=C:\development\sources\ccsolutions_wbs\webservice\ufrm_client.pas</Transaction>
+    <Transaction>2018/12/29 21:56:22.000.286,C:\development\sources\ccsolutions_wbs\webservice\ufrm_clientes.dfm=C:\development\sources\ccsolutions_wbs\webservice\ufrm_client.dfm</Transaction>
+    <Transaction>2018/12/29 21:56:55.000.699,C:\development\sources\ccsolutions_wbs\webservice\ufrm_cliente.pas=C:\development\sources\ccsolutions_wbs\webservice\ufrm_clientes.pas</Transaction>
+    <Transaction>2018/12/29 21:56:55.000.699,C:\development\sources\ccsolutions_wbs\webservice\ufrm_cliente.dfm=C:\development\sources\ccsolutions_wbs\webservice\ufrm_clientes.dfm</Transaction>
   </Transactions>
 </BorlandProject>

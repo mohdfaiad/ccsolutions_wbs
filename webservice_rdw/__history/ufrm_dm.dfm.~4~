@@ -1,0 +1,34 @@
+object DataModule1: TDataModule1
+  OldCreateOrder = False
+  Height = 328
+  Width = 428
+  object connDB: TFDConnection
+    Params.Strings = (
+      'ConnectionDef=database')
+    Connected = True
+    LoginPrompt = False
+    Left = 24
+    Top = 16
+  end
+  object waitCursor: TFDGUIxWaitCursor
+    Provider = 'Console'
+    Left = 176
+    Top = 16
+  end
+  object driverLink: TFDPhysMySQLDriverLink
+    VendorHome = 'C:\ccsolutions_wbs\'
+    VendorLib = 'libmysql.dll'
+    Left = 120
+    Top = 16
+  end
+  object mamDB: TFDManager
+    DriverDefFileName = 'C:\ccsolutions_wbs\config\banco.ini'
+    ConnectionDefFileName = 'C:\ccsolutions_wbs\config\banco.ini'
+    FormatOptions.AssignedValues = [fvMapRules]
+    FormatOptions.OwnMapRules = True
+    FormatOptions.MapRules = <>
+    Active = True
+    Left = 72
+    Top = 16
+  end
+end

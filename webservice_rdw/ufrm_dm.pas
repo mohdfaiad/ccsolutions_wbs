@@ -1,0 +1,54 @@
+unit ufrm_dm;
+
+interface
+
+uses
+  System.SysUtils,
+  System.Classes,
+
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Error,
+  FireDAC.UI.Intf,
+  FireDAC.Phys.Intf,
+  FireDAC.Stan.Def,
+  FireDAC.Stan.Pool,
+  FireDAC.Stan.Async,
+  FireDAC.Phys,
+  FireDAC.Phys.MySQL,
+  FireDAC.Phys.MySQLDef,
+  FireDAC.ConsoleUI.Wait,
+  FireDAC.Comp.Client,
+  FireDAC.Comp.UI,
+
+  Data.DB,
+
+  uRESTDWPoolerDB,
+  uRestDWDriverFD,
+  uDWAbout,
+  uDWDatamodule;
+
+type
+  Tfrm_dm = class(TServerMethodDataModule)
+    connDB: TFDConnection;
+    waitCursor: TFDGUIxWaitCursor;
+    driverLink: TFDPhysMySQLDriverLink;
+    mamDB: TFDManager;
+    poolerDB: TRESTDWPoolerDB;
+    driverFD: TRESTDWDriverFD;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_dm: Tfrm_dm;
+
+implementation
+
+{%CLASSGROUP 'FMX.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

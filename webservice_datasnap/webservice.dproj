@@ -6,7 +6,7 @@
         <MainSource>webservice.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Linux64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>129</TargetedPlatforms>
         <AppType>Console</AppType>
     </PropertyGroup>
@@ -64,7 +64,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <DCC_UsePackage>FireDACADSDriver;FireDACMSSQLDriver;bindengine;FireDACMySQLDriver;DataSnapClient;IndySystem;FireDACInfxDriver;emshosting;FireDACTDataDriver;DbxCommonDriver;frxFD25;xmlrtl;DataSnapNativeClient;rtl;DbxClientDriver;FireDACODBCDriver;DataSnapIndy10ServerTransport;FireDACMongoDBDriver;DataSnapServerMidas;DatasnapConnectorsFreePascal;inetdb;emsedge;dbexpress;IndyCore;dsnap;DataSnapCommon;DataSnapConnectors;FireDACOracleDriver;FireDACCommonODBC;FireDACDb2Driver;FireDACPgDriver;FireDACASADriver;DataSnapServer;CustomIPTransport;bindcomp;dbxcds;dsnapxml;dbrtl;IndyProtocols;$(DCC_UsePackage)</DCC_UsePackage>
         <Debugger_Launcher>/usr/bin/xterm -e &quot;%debuggee%&quot;</Debugger_Launcher>
         <Manifest_File>(None)</Manifest_File>
-        <DCC_ExeOutput>C:\ccsolutions_wbs\webservice\linux64\</DCC_ExeOutput>
+        <DCC_ExeOutput>C:\ccsolutions_wbs\webservice\.\$(Platform)</DCC_ExeOutput>
         <DCC_DcuOutput>C:\temp\ccsolutions_wbs\webservice\.\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_UnitSearchPath>$(fmxlinux)\Lib\$(ProductVersion)\$(Config);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
@@ -74,7 +74,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <DCC_ExeOutput>C:\ccsolutions_wbs\webservice\win32\</DCC_ExeOutput>
+        <DCC_ExeOutput>C:\ccsolutions_wbs\webservice\.\$(Platform)</DCC_ExeOutput>
         <DCC_DcuOutput>C:\temp\ccsolutions_wbs\webservice\.\$(Platform)\$(Config)</DCC_DcuOutput>
         <Manifest_File>(None)</Manifest_File>
     </PropertyGroup>
@@ -92,7 +92,6 @@ $(PostBuildEvent)]]></PostBuildEvent>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Manifest_File>(None)</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -128,8 +127,8 @@ $(PostBuildEvent)]]></PostBuildEvent>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="ufrm_client.pas">
-            <Form>frm_client</Form>
+        <DCCReference Include="ufrm_cliente.pas">
+            <Form>frm_cliente</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
@@ -300,9 +299,10 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <BorlandProject>
             <Delphi.Personality>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\Users\Usuario\AppData\Roaming\IntraWeb XIV\Bin\dclIntraweb_14_D10_2.bpl">IntraWeb 14.0 Design Package for RAD Studio 10.2 Tokyo</Excluded_Packages>
+                    <Excluded_Packages Name="C:\development\components\acbr\Lib\Delphi\LibD26\ACBr_Integrador.bpl">ACBr - Integrador - (http://www.projetoacbr.com.br/)</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerDBXPluginEnt260.bpl">DBExpress Enterprise Data Explorer Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
                 <Source>
                     <Source Name="MainSource">webservice.dpr</Source>
