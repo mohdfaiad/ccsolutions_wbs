@@ -9,6 +9,7 @@ object frm_webservice: Tfrm_webservice
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object StatusBar_1: TStatusBar
     Position.Y = 458.000000000000000000

@@ -1,12 +1,11 @@
 object frm_dm: Tfrm_dm
   OldCreateOrder = False
   Encoding = esASCII
-  Height = 207
-  Width = 249
+  Height = 328
+  Width = 428
   object connDB: TFDConnection
     Params.Strings = (
       'ConnectionDef=database')
-    Connected = True
     LoginPrompt = False
     Left = 24
     Top = 16
@@ -17,7 +16,7 @@ object frm_dm: Tfrm_dm
     Top = 16
   end
   object driverLink: TFDPhysMySQLDriverLink
-    VendorHome = 'C:\ccsolutions\'
+    VendorHome = 'C:\ccsolutions_wbs\'
     VendorLib = 'libmysql.dll'
     Left = 120
     Top = 16

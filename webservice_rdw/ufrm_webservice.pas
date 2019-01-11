@@ -10,6 +10,7 @@ uses
   System.Variants,
   System.Actions,
   System.ImageList,
+  System.IniFiles,
 
   FMX.Types,
   FMX.Controls,
@@ -54,8 +55,14 @@ type
     procedure Action_pararExecute(Sender: TObject);
     procedure Action_fecharExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
+    arqIni: TIniFile;
+
+    function booleanCheckbox(checkbox: TCheckBox): Boolean;
     procedure statusButton;
+    procedure lerIniFile;
+    procedure escreverIniFile;
   public
 
   end;
@@ -95,6 +102,8 @@ begin
     servicePooler.ServerParams.HasAuthentication := False;
   end;
 
+  escreverIniFile;
+
   servicePooler.Active := not servicePooler.Active;
   statusButton;
 end;
@@ -105,9 +114,43 @@ begin
   statusButton;
 end;
 
+procedure Tfrm_webservice.escreverIniFile;
+begin
+  arqIni := TIniFile.Create('C:\ccsolutions\config\webservice.ini');
+
+  arqIni.WriteString('WEBSERVICE', 'CONF_PORT', Edit_porta.Text);
+  arqIni.WriteString('WEBSERVICE', 'CONF_USUARIO', Edit_usuario.Text);
+  arqIni.WriteString('WEBSERVICE', 'CONF_SENHA', Edit_senha.Text);
+  arqIni.WriteBool('WEBSERVICE', 'CONF_AUTENTICACAO', booleanCheckbox(CheckBox_autenticao));
+end;
+
 procedure Tfrm_webservice.FormCreate(Sender: TObject);
 begin
   servicePooler.ServerMethodClass := Tfrm_dm;
+end;
+
+procedure Tfrm_webservice.FormShow(Sender: TObject);
+begin
+  lerIniFile;
+end;
+
+function Tfrm_webservice.booleanCheckbox(checkbox: TCheckBox): Boolean;
+begin
+  if checkbox.IsChecked then begin
+    Result := True;
+  end else begin
+    Result := False;
+  end;
+end;
+
+procedure Tfrm_webservice.lerIniFile;
+begin
+  arqIni := TIniFile.Create('C:\ccsolutions\config\webservice.ini');
+
+  Edit_porta.Text := arqIni.ReadString('WEBSERVICE', 'CONF_PORT', '');
+  Edit_usuario.Text := arqIni.ReadString('WEBSERVICE', 'CONF_USUARIO', '');
+  Edit_senha.Text := arqIni.ReadString('WEBSERVICE', 'CONF_SENHA', '');
+  CheckBox_autenticao.IsChecked := arqIni.ReadBool('WEBSERVICE', 'CONF_AUTENTICACAO', False);
 end;
 
 procedure Tfrm_webservice.statusButton;

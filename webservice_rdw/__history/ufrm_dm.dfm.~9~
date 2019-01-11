@@ -1,8 +1,8 @@
 object frm_dm: Tfrm_dm
   OldCreateOrder = False
   Encoding = esASCII
-  Height = 207
-  Width = 249
+  Height = 328
+  Width = 428
   object connDB: TFDConnection
     Params.Strings = (
       'ConnectionDef=database')

@@ -10,6 +10,7 @@ uses
   System.Variants,
   System.Actions,
   System.ImageList,
+  System.IniFiles,
 
   FMX.Types,
   FMX.Controls,
@@ -32,7 +33,7 @@ type
     servicePooler: TRESTServicePooler;
     ImageList_1: TImageList;
     ActionList_1: TActionList;
-    StatusBar1: TStatusBar;
+    StatusBar_1: TStatusBar;
     Panel_bottom: TPanel;
     Button_iniciar: TButton;
     Button_parar: TButton;
@@ -49,14 +50,18 @@ type
     Label_senha: TLabel;
     Edit_senha: TEdit;
     CheckBox_autenticao: TCheckBox;
-    GroupBox_autenticao: TGroupBox;
-    GroupBox_servico: TGroupBox;
+    GroupBox_servidor: TGroupBox;
     procedure Action_iniciarExecute(Sender: TObject);
     procedure Action_pararExecute(Sender: TObject);
     procedure Action_fecharExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
+    arqIni: TIniFile;
+
+    function inteiroCheckbox(checkbox: TCheckBox): Integer;
     procedure statusButton;
+    procedure lerIniFile;
+    procedure escreverIniFile;
   public
 
   end;
@@ -83,6 +88,21 @@ end;
 procedure Tfrm_webservice.Action_iniciarExecute(Sender: TObject);
 begin
   servicePooler.ServicePort := StrToInt(Edit_porta.Text);
+
+  if CheckBox_autenticao.IsChecked then begin
+    if Edit_usuario.Text.IsEmpty or Edit_senha.Text.IsEmpty then begin
+      ShowMessage('Usuário/Senha em Branco!');
+    end else begin
+      servicePooler.ServerParams.HasAuthentication := True;
+      servicePooler.ServerParams.UserName := Edit_usuario.Text;
+      servicePooler.ServerParams.Password := Edit_senha.Text;
+    end;
+  end else begin
+    servicePooler.ServerParams.HasAuthentication := False;
+  end;
+
+
+
   servicePooler.Active := not servicePooler.Active;
   statusButton;
 end;
@@ -93,9 +113,38 @@ begin
   statusButton;
 end;
 
+procedure Tfrm_webservice.escreverIniFile;
+begin
+  arqIni := TIniFile.Create('C:\ccsolutions\config\webservice.ini');
+
+  arqIni.WriteString('WEBSERVICE', 'CONF_PORT', Edit_porta.Text);
+  arqIni.WriteString('WEBSERVICE', 'CONF_USUARIO', Edit_usuario.Text);
+  arqIni.WriteString('WEBSERVICE', 'CONF_SENHA', Edit_senha.Text);
+  arqIni.WriteInteger('WEBSERVICE', 'CONF_AUTENTICACAO', inteiroCheckbox(CheckBox_autenticao));
+end;
+
 procedure Tfrm_webservice.FormCreate(Sender: TObject);
 begin
   servicePooler.ServerMethodClass := Tfrm_dm;
+end;
+
+function Tfrm_webservice.inteiroCheckbox(checkbox: TCheckBox): Integer;
+begin
+  if checkbox.IsChecked then begin
+    Result := 1;
+  end else begin
+    Result := 0;
+  end;
+end;
+
+procedure Tfrm_webservice.lerIniFile;
+begin
+  arqIni := TIniFile.Create('C:\ccsolutions\config\webservice.ini');
+
+  Edit_porta.Text := arqIni.ReadString('WEBSERVICE', 'CONF_PORT', '');
+  Edit_usuario.Text := arqIni.ReadString('WEBSERVICE', 'CONF_USUARIO', '');
+  Edit_senha.Text := arqIni.ReadString('WEBSERVICE', 'CONF_SENHA', '');
+  CheckBox_autenticao.IsChecked.ToInteger := arqIni.ReadInteger('WEBSERVICE', 'CONF_AUTENTICACAO', 0);
 end;
 
 procedure Tfrm_webservice.statusButton;
