@@ -23,8 +23,8 @@ object frm_dm: Tfrm_dm
     Top = 16
   end
   object mamDB: TFDManager
-    DriverDefFileName = 'C:\ccsolutions\config\database.ini'
-    ConnectionDefFileName = 'C:\ccsolutions\config\database.ini'
+    DriverDefFileName = 'C:\ccsolutions\config\banco.ini'
+    ConnectionDefFileName = 'C:\ccsolutions\config\banco.ini'
     FormatOptions.AssignedValues = [fvMapRules]
     FormatOptions.OwnMapRules = True
     FormatOptions.MapRules = <>

@@ -9,8 +9,9 @@ object frm_webservice: Tfrm_webservice
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnShow = FormShow
   DesignerMasterStyle = 0
-  object StatusBar1: TStatusBar
+  object StatusBar_1: TStatusBar
     Position.Y = 458.000000000000000000
     ShowSizeGrip = True
     Size.Width = 640.000000000000000000
@@ -80,90 +81,6 @@ object frm_webservice: Tfrm_webservice
       TextSettings.HorzAlign = Center
       Text = 'Par'#226'metros do Servidor'
       TabOrder = 0
-    end
-  end
-  object GroupBox_autenticao: TGroupBox
-    Position.X = 8.000000000000000000
-    Position.Y = 128.000000000000000000
-    Size.Width = 625.000000000000000000
-    Size.Height = 105.000000000000000000
-    Size.PlatformDefault = False
-    Text = 'Autentica'#231#227'o'
-    TabOrder = 9
-    object CheckBox_autenticao: TCheckBox
-      Position.X = 16.000000000000000000
-      Position.Y = 22.000000000000000000
-      TabOrder = 0
-      Text = 'Status'
-    end
-    object Label_senha: TLabel
-      Position.X = 125.000000000000000000
-      Position.Y = 49.000000000000000000
-      Size.Width = 150.000000000000000000
-      Size.Height = 40.000000000000000000
-      Size.PlatformDefault = False
-      TextSettings.VertAlign = Leading
-      Text = 'Senha'
-      TabOrder = 1
-      object Edit_senha: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        Align = Bottom
-        TabOrder = 0
-        Text = 'webservicePa$$word'
-        Position.Y = 18.000000000000000000
-        Size.Width = 150.000000000000000000
-        Size.Height = 22.000000000000000000
-        Size.PlatformDefault = False
-      end
-    end
-    object Label_usuario: TLabel
-      Position.X = 16.000000000000000000
-      Position.Y = 49.000000000000000000
-      Size.Width = 100.000000000000000000
-      Size.Height = 40.000000000000000000
-      Size.PlatformDefault = False
-      TextSettings.VertAlign = Leading
-      Text = 'Usu'#225'rio'
-      TabOrder = 2
-      object Edit_usuario: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        Align = Bottom
-        TabOrder = 0
-        Text = 'webservice'
-        Position.Y = 18.000000000000000000
-        Size.Width = 100.000000000000000000
-        Size.Height = 22.000000000000000000
-        Size.PlatformDefault = False
-      end
-    end
-  end
-  object GroupBox_servico: TGroupBox
-    Position.X = 8.000000000000000000
-    Position.Y = 56.000000000000000000
-    Size.Width = 625.000000000000000000
-    Size.Height = 73.000000000000000000
-    Size.PlatformDefault = False
-    Text = 'Servi'#231'o'
-    TabOrder = 10
-    object Label_porta: TLabel
-      Position.X = 16.000000000000000000
-      Position.Y = 24.000000000000000000
-      Size.Width = 100.000000000000000000
-      Size.Height = 40.000000000000000000
-      Size.PlatformDefault = False
-      TextSettings.VertAlign = Leading
-      Text = 'Porta'
-      TabOrder = 0
-      object Edit_porta: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        Align = Bottom
-        TabOrder = 0
-        Text = '80'
-        Position.Y = 18.000000000000000000
-        Size.Width = 100.000000000000000000
-        Size.Height = 22.000000000000000000
-        Size.PlatformDefault = False
-      end
     end
   end
   object servicePooler: TRESTServicePooler

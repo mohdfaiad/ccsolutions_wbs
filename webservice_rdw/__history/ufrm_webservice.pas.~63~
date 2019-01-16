@@ -55,6 +55,7 @@ type
 
     CONST
       pasta           = 'config\';
+      fileBancoDados  = 'database.ini';
       fileServidorWBS = 'swebservice.ini';
 
     procedure statusButton;

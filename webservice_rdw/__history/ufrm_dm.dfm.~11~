@@ -6,7 +6,6 @@ object frm_dm: Tfrm_dm
   object connDB: TFDConnection
     Params.Strings = (
       'ConnectionDef=database')
-    Connected = True
     LoginPrompt = False
     Left = 24
     Top = 16
